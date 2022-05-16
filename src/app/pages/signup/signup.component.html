@@ -1,1 +1,36 @@
-<p>signup works!</p>
+<div class="main_component">
+    <div class="div-flex">
+        <h1>Fiók regisztrálása!</h1>
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+            <mat-form-field>
+                <mat-label for="email">Email cím: </mat-label>
+                <input matInput type="text" formControlName="email" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label for="password">Jelszó: </mat-label>
+                <input matInput type="password" formControlName="password" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label for="rePassword">Jelszó megerősítése: </mat-label>
+                <input matInput type="password" formControlName="rePassword" />
+            </mat-form-field>
+            <div formGroupName="name" class="subForm">
+                <mat-form-field>
+                    <mat-label for="firstname">Keresztnév: </mat-label>
+                    <input matInput type="text" formControlName="firstname" />
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label for="firstname">Vezetéknév: </mat-label>
+                    <input matInput type="text" formControlName="lastname" />
+                </mat-form-field>
+            </div>
+            <div>
+                <span class="buttons">
+                    <button mat-raised-button color="primary" type="submit">Regisztráció</button>
+                </span><span class="buttons">
+                    <button mat-raised-button color="primary" (click)="goBack()">Visszalépés</button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>

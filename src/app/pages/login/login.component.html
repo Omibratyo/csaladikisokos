@@ -1,1 +1,18 @@
-<p>login works!</p>
+<button (click)="login()" class="btn btn-primary">Google bejelentkezés</button>
+
+<span class="loading-indicator" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</span>
+
+<div class="main_component">
+    <mat-form-field>
+        <mat-label for="email">Email cím: </mat-label><input matInput type="text" [formControl]="email" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label for="password">Jelszó: </mat-label><input matInput type="password" [formControl]="password" />
+    </mat-form-field>
+    <span>
+        <span><button mat-raised-button color="primary" (click)="loginnew()">Belépés</button></span>
+        <span><button mat-raised-button color="primary" [routerLink]="'/signup'">Regisztráció</button></span>
+    </span>
+</div>

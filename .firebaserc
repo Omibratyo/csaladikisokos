@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "csaladikisokos-a2f5b": {
+      "hosting": {
+        "csaladikisokos": [
+          "csaladikisokos-a2f5b"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "csaladikisokos-a2f5b"
+  }
+}
