@@ -4,24 +4,30 @@
         <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
             <mat-form-field>
                 <mat-label for="email">Email cím: </mat-label>
-                <input matInput type="text" formControlName="email" />
+                <input matInput type="text" formControlName="email" required/>
             </mat-form-field>
             <mat-form-field>
                 <mat-label for="password">Jelszó: </mat-label>
-                <input matInput type="password" formControlName="password" />
+                <input matInput type="password" formControlName="password" minlength="6" requied />
+                <div *ngIf="password?.hasError('minlength')">
+                    Jelszónak legalább <a style="font-weight: bold;">6</a> hosszúságúnak kell lennie!
+               </div> 
             </mat-form-field>
             <mat-form-field>
                 <mat-label for="rePassword">Jelszó megerősítése: </mat-label>
-                <input matInput type="password" formControlName="rePassword" />
+                <input matInput type="password" formControlName="rePassword" minlength="6" requied/>
+                <div *ngIf="rePassword?.value != password?.value" class="text-danger">
+                    A jelszavaknak nem egyeznek!
+               </div> 
             </mat-form-field>
             <div formGroupName="name" class="subForm">
                 <mat-form-field>
                     <mat-label for="firstname">Keresztnév: </mat-label>
-                    <input matInput type="text" formControlName="firstname" />
+                    <input matInput type="text" formControlName="firstname" required/>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label for="firstname">Vezetéknév: </mat-label>
-                    <input matInput type="text" formControlName="lastname" />
+                    <input matInput type="text" formControlName="lastname" required/>
                 </mat-form-field>
             </div>
             <div>

@@ -1,7 +1,7 @@
 
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
 import { User } from '../../../app/shared/models/User';
 import { UserService } from '../../shared/services/user.service';
@@ -15,16 +15,18 @@ import { Router } from '@angular/router';
 export class SignupComponent implements OnInit {
 
   signUpForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-    rePassword: new FormControl(''),
+    email: new FormControl('', Validators.required),
+    password: new FormControl('' , Validators.minLength(6)),
+    rePassword: new FormControl('', Validators.minLength(6)),
     name: new FormGroup({
       firstname: new FormControl(''),
       lastname: new FormControl('')
     })
   });
 
-  constructor(private location: Location, private authService: AuthService, private userService: UserService, private router: Router) { }
+  constructor(private location: Location, private authService: AuthService, private userService: UserService, private router: Router) {
+    
+   }
 
   ngOnInit(): void {}
 
@@ -53,5 +55,13 @@ export class SignupComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+
+  get password() {
+    return this.signUpForm.get('password');
+  } 
+
+  get rePassword() {
+    return this.signUpForm.get('rePassword');
+  } 
 
 }
