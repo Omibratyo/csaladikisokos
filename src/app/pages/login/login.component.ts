@@ -13,6 +13,8 @@ import { AuthService } from '../../../app/shared/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  public showPassword: boolean = false;
+
   email = new FormControl('');
   password = new FormControl('');
 
@@ -46,5 +48,9 @@ export class LoginComponent implements OnInit {
 
   ngOnDestroy() {
     this.loadingSubscription?.unsubscribe();
+  }
+
+  public togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 }

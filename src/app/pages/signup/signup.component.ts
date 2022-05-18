@@ -13,9 +13,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  public showPassword: boolean = false;
 
   signUpForm = new FormGroup({
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
     password: new FormControl('' , Validators.minLength(6)),
     rePassword: new FormControl('', Validators.minLength(6)),
     name: new FormGroup({
@@ -63,5 +64,13 @@ export class SignupComponent implements OnInit {
   get rePassword() {
     return this.signUpForm.get('rePassword');
   } 
+
+  get email() {
+    return this.signUpForm.get('email');
+  }
+
+  public togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 
 }

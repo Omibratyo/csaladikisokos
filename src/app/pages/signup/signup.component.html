@@ -1,33 +1,40 @@
 <div class="main_component">
     <div class="div-flex">
-        <h1>Fiók regisztrálása!</h1>
         <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+            <h1>Fiók regisztrálása!</h1>
             <mat-form-field>
                 <mat-label for="email">Email cím: </mat-label>
                 <input matInput type="text" formControlName="email" required/>
             </mat-form-field>
+            <span class="error" *ngIf="email?.invalid && email?.touched">Az email cím érvénytelen!</span>
             <mat-form-field>
                 <mat-label for="password">Jelszó: </mat-label>
-                <input matInput type="password" formControlName="password" minlength="6" requied />
-                <div *ngIf="password?.hasError('minlength')">
-                    Jelszónak legalább <a style="font-weight: bold;">6</a> hosszúságúnak kell lennie!
-               </div> 
+                <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password" minlength="6" required />
+                <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                    {{showPassword?'visibility_off':'visibility'}}
+                </mat-icon>
             </mat-form-field>
+            <div *ngIf="password?.hasError('minlength')">
+                Jelszónak legalább <a style="font-weight: bold;">6</a> hosszúságúnak kell lennie!
+           </div> 
             <mat-form-field>
                 <mat-label for="rePassword">Jelszó megerősítése: </mat-label>
-                <input matInput type="password" formControlName="rePassword" minlength="6" requied/>
-                <div *ngIf="rePassword?.value != password?.value" class="text-danger">
-                    A jelszavaknak nem egyeznek!
-               </div> 
+                <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="rePassword" minlength="6" required/>
+                <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                    {{showPassword?'visibility_off':'visibility'}}
+                </mat-icon>
             </mat-form-field>
+            <div *ngIf="rePassword?.value != password?.value" class="text-danger">
+                A jelszavaknak nem egyeznek!
+           </div> 
             <div formGroupName="name" class="subForm">
                 <mat-form-field>
                     <mat-label for="firstname">Keresztnév: </mat-label>
-                    <input matInput type="text" formControlName="firstname" required/>
+                    <input matInput type="text" formControlName="firstname"/>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label for="firstname">Vezetéknév: </mat-label>
-                    <input matInput type="text" formControlName="lastname" required/>
+                    <input matInput type="text" formControlName="lastname"/>
                 </mat-form-field>
             </div>
             <div>
