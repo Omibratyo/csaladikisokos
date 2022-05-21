@@ -3,11 +3,13 @@
         <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
             <h1>Fiók regisztrálása!</h1>
             <mat-form-field>
+                <mat-icon matPrefix>email</mat-icon>
                 <mat-label for="email">Email cím: </mat-label>
                 <input matInput type="text" formControlName="email" required/>
             </mat-form-field>
             <span class="error" *ngIf="email?.invalid && email?.touched">Az email cím érvénytelen!</span>
             <mat-form-field>
+                <mat-icon matPrefix>vpn_key</mat-icon>
                 <mat-label for="password">Jelszó: </mat-label>
                 <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password" minlength="6" required />
                 <mat-icon matSuffix (click)="togglePasswordVisibility()">
@@ -18,6 +20,7 @@
                 Jelszónak legalább <a style="font-weight: bold;">6</a> hosszúságúnak kell lennie!
            </div> 
             <mat-form-field>
+                <mat-icon matPrefix>lock</mat-icon>
                 <mat-label for="rePassword">Jelszó megerősítése: </mat-label>
                 <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="rePassword" minlength="6" required/>
                 <mat-icon matSuffix (click)="togglePasswordVisibility()">
@@ -29,21 +32,24 @@
            </div> 
             <div formGroupName="name" class="subForm">
                 <mat-form-field>
-                    <mat-label for="firstname">Keresztnév: </mat-label>
+                    <mat-icon matPrefix>person</mat-icon>
+                    <mat-label for="firstname">Keresztnév:</mat-label>
                     <input matInput type="text" formControlName="firstname"/>
                 </mat-form-field>
                 <mat-form-field>
+                    <mat-icon matPrefix>person</mat-icon>
                     <mat-label for="firstname">Vezetéknév: </mat-label>
                     <input matInput type="text" formControlName="lastname"/>
                 </mat-form-field>
             </div>
             <div>
                 <span class="buttons">
-                    <button mat-raised-button color="primary" type="submit">Regisztráció</button>
+                    <button mat-raised-button class="btn btn-success" type="submit">Regisztráció</button>
                 </span><span class="buttons">
-                    <button mat-raised-button color="primary" (click)="goBack()">Visszalépés</button>
+                    <button mat-raised-button class="btn btn-success" (click)="goBack()">Visszalépés</button>
                 </span>
             </div>
+            <p class="top">Van már fiókod? <a routerLink="/login">Bejelentkezés</a></p>
         </form>
     </div>
 </div>

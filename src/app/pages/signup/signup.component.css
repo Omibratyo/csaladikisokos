@@ -31,3 +31,10 @@ form {
 button {
     width: 130px;
 }
+.top{
+    margin-top: 20px;
+}
+.mat-icon{
+    display: inline - flex;
+    vertical-align: middle;
+}

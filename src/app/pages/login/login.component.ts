@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   loading: boolean = false;
 
-  constructor( private authService: AuthService, private afAuth: AngularFireAuth,private router: Router) { }
+  constructor( public authService: AuthService, private afAuth: AngularFireAuth,private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
 
   async loginnew() {
     this.loading = true;
-
       this.authService.loginnew(this.email.value, this.password.value).then(cred => {
         console.log(cred);
         this.router.navigateByUrl('');

@@ -4,9 +4,11 @@
 
 <div class="main_component">
     <mat-form-field>
+        <mat-icon matPrefix>email</mat-icon>
         <mat-label for="email">Email cím: </mat-label><input matInput type="text" [formControl]="email" required/>
     </mat-form-field>
     <mat-form-field>
+        <mat-icon matPrefix>vpn_key</mat-icon>
         <mat-label for="password">Jelszó: </mat-label>
         <input matInput [type]="showPassword ? 'text' : 'password'" [formControl]="password" required/>
         <mat-icon matSuffix (click)="togglePasswordVisibility()">
@@ -14,9 +16,9 @@
         </mat-icon>
     </mat-form-field>
     <span>
-        <span><button mat-raised-button color="primary" (click)="loginnew()">Belépés</button></span>
-        <span><button mat-raised-button color="primary" [routerLink]="'/signup'">Regisztráció</button></span>
+        <span><button mat-raised-button class="btn btn-success" (click)="loginnew()">Belépés</button></span>
+        <span><button mat-raised-button class="btn btn-success" [routerLink]="'/signup'">Regisztráció</button></span>
     </span>
     <span>vagy</span>
-    <button (click)="login()" class="btn btn-primary">Google bejelentkezés</button>
+    <button (click)="authService.GoogleAuth()" class="btn btn-success">Google bejelentkezés</button>
 </div>
