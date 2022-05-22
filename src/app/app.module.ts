@@ -30,6 +30,15 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AuthService } from './shared/services/auth.service';
 import { UserService } from './shared/services/user.service';
 import { HomeComponent } from './pages/home/home.component';
+import { ShoppingListComponent } from './pages/shopping-list/shopping-list.component';
+import { RecipesComponent } from './pages/recipes/recipes.component';
+import { BudgetComponent } from './pages/budget/budget.component';
+import { BucketListComponent } from './pages/bucket-list/bucket-list.component';
+import { StorageComponent } from './pages/storage/storage.component';
+import { StorageItemComponent } from './pages/storage-item/storage-item.component';
+import { StorageItemAddComponent } from './pages/storage-item-add/storage-item-add.component';
+import { StorageItemUpdateComponent } from './pages/storage-item-update/storage-item-update.component';
+import { StorageMissingItemsComponent } from './pages/storage-missing-items/storage-missing-items.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +46,16 @@ import { HomeComponent } from './pages/home/home.component';
     BsNavbarComponent,
     LoginComponent,
     SignupComponent,
-    HomeComponent
+    HomeComponent,
+    ShoppingListComponent,
+    RecipesComponent,
+    BudgetComponent,
+    BucketListComponent,
+    StorageComponent,
+    StorageItemComponent,
+    StorageItemAddComponent,
+    StorageItemUpdateComponent,
+    StorageMissingItemsComponent
   ],
   imports: [
     BrowserModule,
