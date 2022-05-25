@@ -1,0 +1,5 @@
+.sticky {
+    position: sticky;
+    top: 0px; /* When the element reaches top: 10px, it becomes fixed. */
+    z-index: 1000;
+}
