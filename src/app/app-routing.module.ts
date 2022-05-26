@@ -1,3 +1,6 @@
+import { CleaningStorageComponent } from './pages/cleaning-storage/cleaning-storage.component';
+import { BathroomStorageComponent } from './pages/bathroom-storage/bathroom-storage.component';
+import { FoodStorageComponent } from './pages/food-storage/food-storage.component';
 import { StorageMissingItemsComponent } from './pages/storage-missing-items/storage-missing-items.component';
 import { StorageItemUpdateComponent } from './pages/storage-item-update/storage-item-update.component';
 import { StorageItemAddComponent } from './pages/storage-item-add/storage-item-add.component';
@@ -27,7 +30,10 @@ const routes: Routes = [
   { path: 'storage-item' , component: StorageItemComponent},
   { path: 'storage-item-add' , component: StorageItemAddComponent},
   { path: 'storage-item-update' , component: StorageItemUpdateComponent},
-  { path: 'storage-missing-items' , component: StorageMissingItemsComponent}
+  { path: 'storage-missing-items' , component: StorageMissingItemsComponent},
+  { path: 'food-storage' , component: FoodStorageComponent},
+  { path: 'bathroom-storage' , component: BathroomStorageComponent},
+  { path: 'cleaning-storage' , component: CleaningStorageComponent}
 ];
 
 @NgModule({

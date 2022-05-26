@@ -39,6 +39,9 @@ import { StorageItemComponent } from './pages/storage-item/storage-item.componen
 import { StorageItemAddComponent } from './pages/storage-item-add/storage-item-add.component';
 import { StorageItemUpdateComponent } from './pages/storage-item-update/storage-item-update.component';
 import { StorageMissingItemsComponent } from './pages/storage-missing-items/storage-missing-items.component';
+import { FoodStorageComponent } from './pages/food-storage/food-storage.component';
+import { BathroomStorageComponent } from './pages/bathroom-storage/bathroom-storage.component';
+import { CleaningStorageComponent } from './pages/cleaning-storage/cleaning-storage.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { StorageMissingItemsComponent } from './pages/storage-missing-items/stor
     StorageItemComponent,
     StorageItemAddComponent,
     StorageItemUpdateComponent,
-    StorageMissingItemsComponent
+    StorageMissingItemsComponent,
+    FoodStorageComponent,
+    BathroomStorageComponent,
+    CleaningStorageComponent
   ],
   imports: [
     BrowserModule,
