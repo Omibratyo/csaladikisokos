@@ -8,6 +8,7 @@ import { Observable, of, switchMap } from 'rxjs';
 import { UserService } from './user.service';
 import { authInstanceFactory } from '@angular/fire/auth/auth.module';
 import { GoogleAuthProvider, user } from '@angular/fire/auth';
+import { AppUser } from '../models/app-user';
 
 @Injectable({
   providedIn: 'root'

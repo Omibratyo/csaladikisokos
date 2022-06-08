@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from '../shared/services/auth.service';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'bs-navbar',
@@ -9,7 +10,7 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class BsNavbarComponent implements OnInit {
 
-  constructor(private afAuth: AngularFireAuth, public authService: AuthService) { }
+  constructor(private afAuth: AngularFireAuth, public authService: AuthService, public userService: UserService) { }
 
   ngOnInit(): void {
   }

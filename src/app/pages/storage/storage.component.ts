@@ -11,5 +11,5 @@ export class StorageComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
 }
