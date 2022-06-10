@@ -1,3 +1,4 @@
+import { BsSidebarComponent } from './bs-sidebar/bs-sidebar.component';
 import { CleaningStorageComponent } from './pages/cleaning-storage/cleaning-storage.component';
 import { BathroomStorageComponent } from './pages/bathroom-storage/bathroom-storage.component';
 import { FoodStorageComponent } from './pages/food-storage/food-storage.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'login' , component: LoginComponent},
   { path: 'signup' , component: SignupComponent},
   { path: 'bs-navbar' , component: BsNavbarComponent},
+  { path: 'bs-sidebar' , component: BsSidebarComponent},
   { path: 'bucket-list' , component: BucketListComponent},
   { path: 'budget' , component: BudgetComponent},
   { path: 'recipes' , component: RecipesComponent},

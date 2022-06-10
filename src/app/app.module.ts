@@ -1,3 +1,5 @@
+import { SharingService } from './shared/services/sharing.service';
+import { ProductsService } from './shared/services/products.service';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { provideAuth, getAuth } from '@angular/fire/auth';
@@ -42,6 +44,7 @@ import { StorageMissingItemsComponent } from './pages/storage-missing-items/stor
 import { FoodStorageComponent } from './pages/food-storage/food-storage.component';
 import { BathroomStorageComponent } from './pages/bathroom-storage/bathroom-storage.component';
 import { CleaningStorageComponent } from './pages/cleaning-storage/cleaning-storage.component';
+import { BsSidebarComponent } from './bs-sidebar/bs-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,8 @@ import { CleaningStorageComponent } from './pages/cleaning-storage/cleaning-stor
     StorageMissingItemsComponent,
     FoodStorageComponent,
     BathroomStorageComponent,
-    CleaningStorageComponent
+    CleaningStorageComponent,
+    BsSidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -90,6 +94,8 @@ import { CleaningStorageComponent } from './pages/cleaning-storage/cleaning-stor
   providers: [
     AuthService, 
     UserService,
+    ProductsService,
+    SharingService
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
