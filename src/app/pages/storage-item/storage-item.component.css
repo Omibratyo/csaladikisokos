@@ -1,0 +1,28 @@
+button {
+    margin-right: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    left: 33%;
+    
+}
+.mat-divider {
+    border-top-color: black;
+    border-top-width: 4px;
+    width: 100%;
+}
+.indent {
+    text-indent: 30px;
+}
+p {
+    font-weight: bold;
+}
+.mat-card-header {   
+    justify-content: center;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 27%;
+}

@@ -1,1 +1,44 @@
-<p>storage-item-update works!</p>
+<div class="main_component">
+    <div class="div-flex"  *ngFor="let product of products">
+      <h1> {{ product.title }} módosítása</h1>
+      <form [formGroup]="update" novalidate (ngSubmit)="onSubmit()">
+  
+        <mat-form-field>
+          <mat-label for="title">Termék neve: </mat-label>
+          <input matInput formControlName="title" [(ngModel)]="product.title">
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label for="quantity">Mennyiség: </mat-label>
+          <input matInput formControlName="quantity" [(ngModel)]="product.quantity">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="category">Kategória: </mat-label>
+            <input matInput formControlName="category" [(ngModel)]="product.category">
+          </mat-form-field>
+
+
+        <!--<mat-form-field>
+            <mat-label for="category">Kategória: </mat-label>
+            <mat-select formControlName="category" name="category">
+                <mat-option *ngFor="let category of categories"  
+                            ngDefaultControl [(ngModel)]="product.category" 
+                            [ngModelOptions]="{standalone: true}" 
+                            [value]="category.value">
+                {{category.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>-->
+
+        <mat-form-field>
+          <mat-label for="description">Termék leírása: </mat-label>
+          <textarea matInput formControlName="description" [(ngModel)]="product.description"></textarea>
+        </mat-form-field>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit">Termék módosítása</button>
+        </mat-card-actions>
+      </form>   
+    </div>
+</div>

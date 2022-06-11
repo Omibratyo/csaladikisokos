@@ -1,1 +1,30 @@
-<p>storage-item-add works!</p>
+<div class="main_component">
+    <div class="div-flex">
+      <h1>Új termék hozzáadása</h1>
+        <form [formGroup]="createProductsForm" novalidate (ngSubmit)="onSubmit()">
+            <mat-form-field>
+                <mat-label for="title">Elem neve: </mat-label>
+                <input matInput type="text" formControlName="title">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label for="quantity">Mennyiség: </mat-label>
+                <input matInput formControlName="quantity">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label for="category">Kategória</mat-label>
+                <mat-select formControlName="category" name="category">
+                    <mat-option *ngFor="let category of categories" [value]="category.value">
+                    {{category.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label for="description">Elem leírása: </mat-label>
+                <textarea matInput type="text" formControlName="description"></textarea>
+            </mat-form-field>
+            <mat-card-actions>
+                <button mat-raised-button type="submit" [routerLink]="'/storage'">Elem hozzáadása</button>
+            </mat-card-actions>
+        </form>
+    </div>
+</div>

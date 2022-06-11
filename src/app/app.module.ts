@@ -45,6 +45,7 @@ import { FoodStorageComponent } from './pages/food-storage/food-storage.componen
 import { BathroomStorageComponent } from './pages/bathroom-storage/bathroom-storage.component';
 import { CleaningStorageComponent } from './pages/cleaning-storage/cleaning-storage.component';
 import { BsSidebarComponent } from './bs-sidebar/bs-sidebar.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { BsSidebarComponent } from './bs-sidebar/bs-sidebar.component';
     BrowserAnimationsModule,
     MatIconModule,
     MatCardModule,
+    MatSelectModule,
     MatDividerModule,
     AngularFireStorageModule,
     Ng2SearchPipeModule
@@ -94,7 +96,6 @@ import { BsSidebarComponent } from './bs-sidebar/bs-sidebar.component';
   providers: [
     AuthService, 
     UserService,
-    ProductsService,
     SharingService
   ],
   bootstrap: [AppComponent],

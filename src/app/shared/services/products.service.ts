@@ -24,7 +24,7 @@ export class ProductsService {
   }
 
   getProductsById(Id: string) {
-    return this.afs.collection<Products>(this.collectionName, ref => ref.where('id', '==', Id).orderBy('price', 'desc')).valueChanges();
+    return this.afs.collection<Products>(this.collectionName, ref => ref.where('id', '==', Id).orderBy('quantity', 'desc')).valueChanges();
   }
 
   async update(products: Products) {

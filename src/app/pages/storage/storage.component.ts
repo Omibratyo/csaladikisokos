@@ -40,7 +40,7 @@ export class StorageComponent implements OnInit {
     this.SharingService.setData(this.productId);
     console.log(this.productId);
 
-   this.router.navigateByUrl('/products');
+   this.router.navigateByUrl('/storage-item');
   }
   
 }
