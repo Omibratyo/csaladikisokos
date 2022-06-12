@@ -4,16 +4,19 @@
       <form [formGroup]="update" novalidate (ngSubmit)="onSubmit()">
   
         <mat-form-field>
+          <mat-icon matPrefix>bookmark</mat-icon>
           <mat-label for="title">Termék neve: </mat-label>
           <input matInput formControlName="title" [(ngModel)]="product.title">
         </mat-form-field>
   
         <mat-form-field>
+          <mat-icon matPrefix>apps</mat-icon>
           <mat-label for="quantity">Mennyiség: </mat-label>
           <input matInput formControlName="quantity" [(ngModel)]="product.quantity">
         </mat-form-field>
 
         <mat-form-field>
+            <mat-icon matPrefix>category</mat-icon>
             <mat-label for="category">Kategória: </mat-label>
             <input matInput formControlName="category" [(ngModel)]="product.category">
           </mat-form-field>
@@ -32,12 +35,13 @@
         </mat-form-field>-->
 
         <mat-form-field>
+          <mat-icon matPrefix>assignment</mat-icon>
           <mat-label for="description">Termék leírása: </mat-label>
           <textarea matInput formControlName="description" [(ngModel)]="product.description"></textarea>
         </mat-form-field>
 
         <mat-card-actions>
-          <button mat-raised-button color="primary" type="submit">Termék módosítása</button>
+          <button mat-raised-button type="submit">Termék módosítása</button>
         </mat-card-actions>
       </form>   
     </div>

@@ -9,12 +9,15 @@ import { UserService } from './user.service';
 import { authInstanceFactory } from '@angular/fire/auth/auth.module';
 import { GoogleAuthProvider, user } from '@angular/fire/auth';
 import { AppUser } from '../models/app-user';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   user$: Observable<firebase.User |null>;
+  collectionName = 'Users';
+  userData: any;
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -57,6 +60,10 @@ export class AuthService {
 
   logout() {
     return this.afAuth.signOut();
+  }
+
+  getAll() {
+    return this.afs.collection<User>(this.collectionName).valueChanges();
   }
 }
 

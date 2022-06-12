@@ -8,6 +8,10 @@ interface Category {
   value: string;
   viewValue: string;
 }
+interface Quantity {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-storage-item-add',
@@ -16,11 +20,25 @@ interface Category {
 })
 export class StorageItemAddComponent {
 
-  selectedValue: string | undefined;
   categories: Category[] = [
     {value: 'Élelmiszer', viewValue: 'Élelmiszer'},
     {value: 'Fürdőszoba', viewValue: 'Fürdőszoba'},
-    {value: 'Takarítás', viewValue: 'Takarítás'},
+    {value: 'Takarítás', viewValue: 'Takarítás'}
+  ];
+  quantities: Quantity[] = [
+    {value: 'mm', viewValue: 'mm'},
+    {value: 'cm', viewValue: 'cm'},
+    {value: 'dm', viewValue: 'dm'},
+    {value: 'm', viewValue: 'm'},
+    {value: 'km', viewValue: 'km'},
+    {value: 'ml', viewValue: 'ml'},
+    {value: 'cl', viewValue: 'cl'},
+    {value: 'dl', viewValue: 'dl'},
+    {value: 'l', viewValue: 'l'},
+    {value: 'mg', viewValue: 'mg'},
+    {value: 'g', viewValue: 'g'},
+    {value: 'dkg', viewValue: 'dkg'},
+    {value: 'kg', viewValue: 'kg'}
   ];
 
   createProductsForm = new FormGroup({
@@ -45,5 +63,4 @@ export class StorageItemAddComponent {
       });
     }
   }
-
 }

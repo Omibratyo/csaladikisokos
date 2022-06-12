@@ -1,32 +1,40 @@
-<div  class="grid-container">
-    <mat-card  class="dashboard-card" *ngFor="let product of products">
-        <mat-card-header >
-            <mat-card-title>
-                {{ product.title }}
-            </mat-card-title>
-        </mat-card-header> 
-        <mat-card-content class="dashboard-card-content">
-            <img class="center" src="../../../assets/grocery.jpg"/>
-        </mat-card-content>
-        <p>Elem leírása: </p>
-        <mat-card-content class="dashboard-card-content">
-            <div class="card_text" class="indent">{{ product.description }}</div>
-            <br>
-        </mat-card-content>
+<div class="grid-container">
+  <mat-card class="dashboard-card" *ngFor="let product of products">
+    <mat-card-header>
+      <mat-card-title>
+        {{ product.title }}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="dashboard-card-content">
+      <img class="center" src="../../../assets/grocery.jpg" />
+    <div class="top">
+        <div class="element">
         <p>Otthon található mennyiség: </p>
         <mat-card-content class="dashboard-card-content">
-            <div class="card_text" class="indent">{{ product.quantity }}</div>
+            <div class="card_text">{{ product.quantity }}</div>
             <br>
         </mat-card-content>
-        <p>Elem kategóriája: </p>
+        </div>
+        <div class="element">
+            <div>
+                <p>Elem kategóriája: </p>
+            </div>
         <mat-card-content class="dashboard-card-content">
-            <div class="card_text" class="indent">{{ product.category }}</div>
+            <div class="card_text">{{ product.category }}</div>
             <br>
         </mat-card-content>
-    <mat-divider></mat-divider>
-    <br>
-    <button  mat-raised-button color="primary" (click)="changeComponent()" [routerLink]="'/storage-item-update'">Elem módosítása</button>
-    <button  mat-raised-button color="warn" (click)="delete(productsId)" [routerLink]="''">Elem törlése</button>
-    </mat-card>
+        </div>
+    </div>
+      <p>Elem leírása: </p>
+      <mat-card-content class="dashboard-card-content">
+        <div class="card_text" class="indent">{{ product.description }}</div>
+        <br>
+      </mat-card-content>
+    </mat-card-content>
+      <mat-divider></mat-divider>
+      <br>
+  </mat-card>
+  <button mat-raised-button class="color" (click)="changeComponent()" [routerLink]="'/storage-item-update'">Elem
+    módosítása</button>
+  <button mat-raised-button color="warn" (click)="delete(productsId)" [routerLink]="''">Elem törlése</button>
 </div>
-

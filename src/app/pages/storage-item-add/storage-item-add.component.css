@@ -37,3 +37,12 @@
     width: 200px;
     height: 40px;
   }
+.line{
+  padding-top: 4.5px;
+  padding-bottom: 0px;
+}
+.element {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+}

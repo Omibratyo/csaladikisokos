@@ -3,7 +3,8 @@ button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    left: 33%;
+    left: 41%;
+    margin-bottom: 15px;
     
 }
 .mat-divider {
@@ -25,4 +26,30 @@ p {
     margin-left: auto;
     margin-right: auto;
     width: 27%;
+}
+.mat-card {
+    padding-bottom: 0px;
+}
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}
+.color {
+    background-color: #198754;
+    color: white;
+}
+.element {
+    display: inline-block;
+    width: 50%;
+    height: 70px;
+    text-align: center;
+    
+}
+.top {
+    margin-top: 35px;
+}
+.mat-card-header .mat-card-title {
+    font-size: 30px;
+}
+.dashboard-card-content {
+    font-size: 16px;
 }
