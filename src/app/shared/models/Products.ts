@@ -4,6 +4,7 @@ export interface Products {
     id: string;
     image_url: string;
     quantity: string;
+    unit: string;
     title: string;
     user_id: string;
 }

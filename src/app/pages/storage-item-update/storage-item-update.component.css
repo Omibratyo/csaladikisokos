@@ -34,3 +34,17 @@
     background-color: #198754;
     color: white
   }
+  .element {
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+  }
+  .elementother {
+    display: inline-block;
+    width: 80%;
+    text-align: left;
+  }
+p {
+  margin-bottom: 0px;
+  color: lightslategray;
+}

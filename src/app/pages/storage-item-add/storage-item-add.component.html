@@ -5,13 +5,13 @@
             <mat-form-field>
                 <mat-icon matPrefix>bookmark</mat-icon>
                 <mat-label  for="title">Elem neve: </mat-label>
-                <input matInput type="text"  class="line" formControlName="title">
+                <input matInput type="text"  class="line" formControlName="title" required>
             </mat-form-field>
             <mat-form-field>
                 <mat-icon matPrefix>apps</mat-icon>
                 <mat-label for="quantity">Mennyiség: </mat-label>
-                <input matInput class="line element" formControlName="quantity">
-                <mat-select formControlName="quantity" name="quantity" class="element">
+                <input matInput class="line element" formControlName="quantity" required>
+                <mat-select formControlName="unit" name="unit" class="element" required>
                     <mat-option *ngFor="let quantity of quantities" [value]="quantity.value">
                     {{quantity.viewValue}}
                     </mat-option>
@@ -20,7 +20,7 @@
             <mat-form-field>
                 <mat-icon matPrefix>category</mat-icon>
                 <mat-label for="category">Kategória</mat-label>
-                <mat-select class="line" formControlName="category" name="category">
+                <mat-select class="line" formControlName="category" name="category" required>
                     <mat-option *ngFor="let category of categories" [value]="category.value">
                     {{category.viewValue}}
                     </mat-option>
@@ -29,7 +29,7 @@
             <mat-form-field>
                 <mat-icon matPrefix>assignment</mat-icon>
                 <mat-label for="description">Elem leírása: </mat-label>
-                <textarea matInput class="line" type="text" formControlName="description"></textarea>
+                <textarea matInput class="line" type="text" formControlName="description" required></textarea>
             </mat-form-field>
             <mat-card-actions>
                 <button mat-raised-button type="button" (click)="onSubmit()" [routerLink]="'/storage'">Elem hozzáadása</button>

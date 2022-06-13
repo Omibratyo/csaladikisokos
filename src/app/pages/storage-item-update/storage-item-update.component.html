@@ -12,7 +12,7 @@
         <mat-form-field>
           <mat-icon matPrefix>apps</mat-icon>
           <mat-label for="quantity">Mennyiség: </mat-label>
-          <input matInput formControlName="quantity" [(ngModel)]="product.quantity">
+          <input matInput formControlName="quantity" [(ngModel)]="product.quantity" class="element"><p class="elementother">{{ product.unit }}</p>
         </mat-form-field>
 
         <mat-form-field>

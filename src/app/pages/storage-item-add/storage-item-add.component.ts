@@ -44,6 +44,7 @@ export class StorageItemAddComponent {
   createProductsForm = new FormGroup({
     title: new FormControl(''),
     quantity: new FormControl(''),
+    unit: new FormControl(''),
     category: new FormControl(''),
     description: new FormControl(''),
   });
@@ -57,10 +58,11 @@ export class StorageItemAddComponent {
  onSubmit(): void{
   if (this.createProductsForm.valid) {
       this.productsService.create(this.createProductsForm.value).then(_ => {
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('/storage');
       }).catch(error => {
         console.error(error);
       });
     }
+    console.log(this.createProductsForm);
   }
 }
