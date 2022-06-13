@@ -1,48 +1,84 @@
 .div-flex {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    height: 100%;
-  }
-  
-  .main_component {
-    height: 100vh;
-  }
-  
-  form div {
-    padding: 5px 5px 5px 5px;
-  }
-  
-  form {
-    display: inline-grid;
-    width: 50%;
-    align-self: center;
-  }
-  
-  .subForm {
-    width: 100%;
-    display: inline-grid;
-  }
-  
-  .buttons {
-    padding: 5px;
-  }
-  
-  button {
-    width: 170px;
-    background-color: #198754;
-    color:white;
-    font-size: 18px;
-    width: 200px;
-    height: 40px;
-  }
-.line{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+
+.main_component {
+  height: 100vh;
+}
+
+form div {
+  padding: 5px 5px 5px 5px;
+}
+
+form {
+  display: inline-grid;
+  width: 50%;
+  align-self: center;
+}
+
+.subForm {
+  width: 100%;
+  display: inline-grid;
+}
+
+.buttons {
+  padding: 5px;
+}
+
+button {
+  width: 170px;
+  background-color: #198754;
+  color: white;
+  font-size: 18px;
+  width: 200px;
+  height: 40px;
+}
+
+.line {
   padding-top: 4.5px;
   padding-bottom: 0px;
 }
+
 .element {
   display: inline-block;
   width: 50%;
   text-align: center;
+}
+
+.vl {
+  border-left: 2px solid black;
+  height: 35px;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container>* {
+  width: 100%;
+}
+
+.middle {
+  text-align: center;
+  color: red;
+}
+
+.error {
+  display: flex;
+  width: 50%;
+  text-align: center;
+  color: red;
+}
+
+.move {
+  display: inline-flex;
 }

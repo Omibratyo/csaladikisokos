@@ -1,14 +1,14 @@
 import { Observable } from 'rxjs';
 import { ProductsService } from '../../shared/services/products.service';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 interface Category {
   value: string;
   viewValue: string;
 }
-interface Quantity {
+interface Unit {
   value: string;
   viewValue: string;
 }
@@ -25,7 +25,7 @@ export class StorageItemAddComponent {
     {value: 'Fürdőszoba', viewValue: 'Fürdőszoba'},
     {value: 'Takarítás', viewValue: 'Takarítás'}
   ];
-  quantities: Quantity[] = [
+  units: Unit[] = [
     {value: 'mm', viewValue: 'mm'},
     {value: 'cm', viewValue: 'cm'},
     {value: 'dm', viewValue: 'dm'},
@@ -42,11 +42,11 @@ export class StorageItemAddComponent {
   ];
 
   createProductsForm = new FormGroup({
-    title: new FormControl(''),
-    quantity: new FormControl(''),
-    unit: new FormControl(''),
-    category: new FormControl(''),
-    description: new FormControl(''),
+    title: new FormControl('',[Validators.required]),
+    quantity: new FormControl('',[Validators.required]),
+    unit: new FormControl('',[Validators.required]),
+    category: new FormControl('',[Validators.required]),
+    description: new FormControl('',[Validators.required]),
   });
 
   createVal: any;
@@ -65,4 +65,9 @@ export class StorageItemAddComponent {
     }
     console.log(this.createProductsForm);
   }
+  get title() { return this.createProductsForm.get('title'); }
+  get quantity() { return this.createProductsForm.get('quantity'); }
+  get unit() { return this.createProductsForm.get('unit'); }
+  get category() { return this.createProductsForm.get('category'); }
+  get description() { return this.createProductsForm.get('description'); }
 }

@@ -1,28 +1,37 @@
 <div class="main_component">
-    <div class="div-flex"  *ngFor="let product of products">
-      <h1> {{ product.title }} módosítása</h1>
-      <form [formGroup]="update" novalidate (ngSubmit)="onSubmit()">
-  
-        <mat-form-field>
-          <mat-icon matPrefix>bookmark</mat-icon>
-          <mat-label for="title">Termék neve: </mat-label>
-          <input matInput formControlName="title" [(ngModel)]="product.title">
-        </mat-form-field>
-  
-        <mat-form-field>
-          <mat-icon matPrefix>apps</mat-icon>
-          <mat-label for="quantity">Mennyiség: </mat-label>
-          <input matInput formControlName="quantity" [(ngModel)]="product.quantity" class="element"><p class="elementother">{{ product.unit }}</p>
-        </mat-form-field>
+  <div class="div-flex" *ngFor="let product of products">
+    <h1> {{ product.title }} módosítása</h1>
+    <form [formGroup]="update" novalidate (ngSubmit)="onSubmit()">
 
-        <mat-form-field>
-            <mat-icon matPrefix>category</mat-icon>
-            <mat-label for="category">Kategória: </mat-label>
-            <input matInput formControlName="category" [(ngModel)]="product.category">
-          </mat-form-field>
+      <mat-form-field>
+        <mat-icon matPrefix>bookmark</mat-icon>
+        <mat-label for="title">Termék neve: </mat-label>
+        <input matInput formControlName="title" [(ngModel)]="product.title">
+        <div class="middle" *ngIf="title?.errors?.['required'] && title?.touched">
+          Név megadása kötelező!
+        </div>
+      </mat-form-field>
 
+      <mat-form-field>
+        <mat-icon matPrefix>apps</mat-icon>
+        <mat-label for="quantity">Mennyiség: </mat-label>
+        <input matInput formControlName="quantity" [(ngModel)]="product.quantity" class="element">
+        <div class="error" *ngIf="quantity?.errors?.['required'] && quantity?.touched">
+          Mennyiség megadása kötelező!
+        </div>
+        <p class="elementother">{{ product.unit }}</p>
+      </mat-form-field>
 
-        <!--<mat-form-field>
+      <mat-form-field>
+        <mat-icon matPrefix>category</mat-icon>
+        <mat-label for="category">Kategória: </mat-label>
+        <input matInput formControlName="category" [(ngModel)]="product.category">
+        <div class="middle" *ngIf="category?.errors?.['required'] && category?.touched">
+          Kategória megadása kötelező!
+        </div>
+      </mat-form-field>
+
+       <!--<mat-form-field>
             <mat-label for="category">Kategória: </mat-label>
             <mat-select formControlName="category" name="category">
                 <mat-option *ngFor="let category of categories"  
@@ -34,15 +43,18 @@
             </mat-select>
         </mat-form-field>-->
 
-        <mat-form-field>
-          <mat-icon matPrefix>assignment</mat-icon>
-          <mat-label for="description">Termék leírása: </mat-label>
-          <textarea matInput formControlName="description" [(ngModel)]="product.description"></textarea>
-        </mat-form-field>
+      <mat-form-field>
+        <mat-icon matPrefix>assignment</mat-icon>
+        <mat-label for="description">Termék leírása: </mat-label>
+        <textarea matInput formControlName="description" [(ngModel)]="product.description"></textarea>
+        <div class="middle" *ngIf="description?.errors?.['required'] && description?.touched">
+          Elem leírása kötelező!
+        </div>
+      </mat-form-field>
 
-        <mat-card-actions>
-          <button mat-raised-button type="submit">Termék módosítása</button>
-        </mat-card-actions>
-      </form>   
-    </div>
+      <mat-card-actions>
+        <button mat-raised-button type="submit" [disabled]="!update.valid">Termék módosítása</button>
+      </mat-card-actions>
+    </form>
+  </div>
 </div>

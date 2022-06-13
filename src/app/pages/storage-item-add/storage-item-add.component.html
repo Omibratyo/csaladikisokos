@@ -1,21 +1,31 @@
 <div class="main_component">
     <div class="div-flex">
       <h1>Új termék hozzáadása</h1>
-        <form [formGroup]="createProductsForm" novalidate>
+        <form [formGroup]="createProductsForm" novalidate class="example-container">
             <mat-form-field>
                 <mat-icon matPrefix>bookmark</mat-icon>
                 <mat-label  for="title">Elem neve: </mat-label>
                 <input matInput type="text"  class="line" formControlName="title" required>
+                <div class="middle" *ngIf="title?.errors?.['required'] && title?.touched">
+                    Név megadása kötelező!
+                </div>
             </mat-form-field>
             <mat-form-field>
                 <mat-icon matPrefix>apps</mat-icon>
                 <mat-label for="quantity">Mennyiség: </mat-label>
-                <input matInput class="line element" formControlName="quantity" required>
-                <mat-select formControlName="unit" name="unit" class="element" required>
-                    <mat-option *ngFor="let quantity of quantities" [value]="quantity.value">
-                    {{quantity.viewValue}}
+                <input matInput type="number" min="0" step="0.1" class="line element" formControlName="quantity" required>
+                <div class="vl"></div>
+                <mat-select formControlName="unit" name="unit" class="element move" required>
+                    <mat-option *ngFor="let unit of units" [value]="unit.value">
+                    {{unit.viewValue}}
                     </mat-option>
                 </mat-select>
+                <div class="error" *ngIf="quantity?.errors?.['required'] && quantity?.touched">
+                    Mennyiség megadása kötelező!
+                </div>
+                <div class="error" *ngIf="unit?.errors?.['required'] && unit?.touched">
+                    Mértékegység megadása kötelező!
+                </div>
             </mat-form-field>
             <mat-form-field>
                 <mat-icon matPrefix>category</mat-icon>
@@ -25,14 +35,20 @@
                     {{category.viewValue}}
                     </mat-option>
                 </mat-select>
+                <div class="middle" *ngIf="category?.errors?.['required'] && category?.touched">
+                    Kategória megadása kötelező!
+                </div>
             </mat-form-field>
             <mat-form-field>
                 <mat-icon matPrefix>assignment</mat-icon>
                 <mat-label for="description">Elem leírása: </mat-label>
                 <textarea matInput class="line" type="text" formControlName="description" required></textarea>
+                <div class="middle" *ngIf="description?.errors?.['required'] && description?.touched">
+                    Elem leírása kötelező!
+                </div>
             </mat-form-field>
             <mat-card-actions>
-                <button mat-raised-button type="button" (click)="onSubmit()" [routerLink]="'/storage'">Elem hozzáadása</button>
+                <button mat-raised-button type="button" (click)="onSubmit()" [disabled]="!createProductsForm.valid" [routerLink]="'/storage'">Elem hozzáadása</button>
             </mat-card-actions>
         </form>
     </div>
