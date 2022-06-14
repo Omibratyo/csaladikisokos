@@ -1,11 +1,19 @@
-<bs-sidebar></bs-sidebar>
 <section class="section-products">
+        <div class="container">
+                <div class="ul_checkbox">
+                        <ul>
+                                <li *ngFor="let checkbox of checkboxArray">
+                                        <input type="{{checkbox.type}}">{{checkbox.category}}
+                                </li>
+                        </ul>
+                </div>
+        </div>
         <button routerLink="/storage-item-add">Elem hozzáadása</button>
 <div id="wrapper">
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let product of products">
+                <div class="col-md-6 col-lg-3 col-xl-2" *ngFor="let product of products">
                         <div id="product-1" class="single-product">
                                 <div class="part-1">
                                         <ul>

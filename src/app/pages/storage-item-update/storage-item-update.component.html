@@ -6,7 +6,7 @@
       <mat-form-field>
         <mat-icon matPrefix>bookmark</mat-icon>
         <mat-label for="title">Termék neve: </mat-label>
-        <input matInput formControlName="title" [(ngModel)]="product.title">
+        <input matInput formControlName="title"  maxlength="15" [(ngModel)]="product.title">
         <div class="middle" *ngIf="title?.errors?.['required'] && title?.touched">
           Név megadása kötelező!
         </div>

@@ -12,6 +12,29 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class StorageComponent implements OnInit {
 
+  checkboxArray:any = [
+    {
+      id:1,
+      type: "checkbox",
+      category: "Minden"
+    },
+    {
+      id:2,
+      type: "checkbox",
+      category: "Élelmiszer"
+    },
+    {
+      id:3,
+      type: "checkbox",
+      category: "Fürdőszoba"
+    },
+    {
+      id:4,
+      type: "checkbox",
+      category: "Takarítás"
+    }
+  ]
+
   productId: any; 
   products: Array<Products> = [];
   loggedInUser?: firebase.default.User | null;

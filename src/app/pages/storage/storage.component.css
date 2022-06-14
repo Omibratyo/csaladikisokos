@@ -30,10 +30,6 @@
 }
 
 @media(min-width:768px) {
-    #wrapper {
-        padding-left: 130px;
-    }
-
     #wrapper.toggled {
         padding-left: 0;
     }
@@ -91,8 +87,8 @@ a:hover {
 
 .section-products .single-product .part-1 {
     position: relative;
-    height: 290px;
-    max-height: 290px;
+    height: 250px;
+    max-height: 250px;
     margin-bottom: 15px;
     overflow: hidden;
 }
@@ -194,21 +190,41 @@ a:hover {
 }
 
 h3, h4 {
-    font-weight: bold;
-    width: 288px;
+    width: 225px;
 }
 input {
     border-width: 3px;
     border-color: black;
     margin-bottom: 50px;
+    height: 15px;
+    width: 15px;
+}
+input:checked {
+    accent-color: #198754;
 }
 button {
     float: right;
-    margin: 10px 20px 30px;
+    margin: 5px 20px 0px;
     border-radius: 8px;
     background-color: #198754;
     border: none;
     font-size: 19px;
     color: white;
     cursor:pointer;
+}
+.ul_checkbox ul {
+    padding: 0px 0px 10px 350px;
+    margin: 0px;
+}
+.ul_checkbox ul li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 15px;
+    font-size: 19px;
+    height: 0px;
+}
+ul,li {
+    height: 0px;
+    padding: 15px;
+    font-size: 19px;
 }
