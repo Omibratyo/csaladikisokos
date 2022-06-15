@@ -2,8 +2,10 @@
         <div class="container">
                 <div class="ul_checkbox">
                         <ul>
-                                <li *ngFor="let checkbox of checkboxArray">
-                                        <input type="{{checkbox.type}}">{{checkbox.category}}
+                                <li>
+                                        <input type="checkbox" [(ngModel)]="filter.food" (ngModelChange)="filterChange()" /> Élelmiszer 
+                                        <input type="checkbox" [(ngModel)]="filter.bathroom" (ngModelChange)="filterChange()" /> Fürdőszoba 
+                                        <input type="checkbox" [(ngModel)]="filter.cleaning" (ngModelChange)="filterChange()" /> Takarítás
                                 </li>
                         </ul>
                 </div>
@@ -13,7 +15,7 @@
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 col-lg-3 col-xl-2" *ngFor="let product of products">
+                <div class="col-md-6 col-lg-3 col-xl-2" *ngFor="let product of filteredProducts">
                         <div id="product-1" class="single-product">
                                 <div class="part-1">
                                         <ul>

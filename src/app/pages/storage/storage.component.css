@@ -54,10 +54,13 @@ body {
     overflow-x: hidden;
 }
 
-a,
-a:hover {
+a,a:hover {
     text-decoration: none;
     color: inherit;
+}
+
+h3 {
+    font-size: 25px;
 }
 
 .section-products {
@@ -89,7 +92,7 @@ a:hover {
     position: relative;
     height: 250px;
     max-height: 250px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     overflow: hidden;
 }
 
@@ -143,7 +146,7 @@ a:hover {
 }
 
 .section-products .single-product:hover .part-1 ul {
-    bottom: 30px;
+    bottom: 55px;
     opacity: 1;
 }
 
@@ -155,7 +158,7 @@ a:hover {
 .section-products .single-product .part-1 ul li a {
     display: inline-block;
     width: 35px;
-    height: 25px;
+    height: 28px;
     line-height: 40px;
     background-color: black;
     color: white;
@@ -165,7 +168,7 @@ a:hover {
 }
 
 .section-products .single-product .part-1 ul li a:hover {
-    color: #fe302f;
+    color:#198754;
     cursor: pointer;
 }
 
@@ -213,7 +216,7 @@ button {
     cursor:pointer;
 }
 .ul_checkbox ul {
-    padding: 0px 0px 10px 350px;
+    padding: 0px 0px 10px 420px;
     margin: 0px;
 }
 .ul_checkbox ul li {

@@ -12,31 +12,10 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class StorageComponent implements OnInit {
 
-  checkboxArray:any = [
-    {
-      id:1,
-      type: "checkbox",
-      category: "Minden"
-    },
-    {
-      id:2,
-      type: "checkbox",
-      category: "Élelmiszer"
-    },
-    {
-      id:3,
-      type: "checkbox",
-      category: "Fürdőszoba"
-    },
-    {
-      id:4,
-      type: "checkbox",
-      category: "Takarítás"
-    }
-  ]
-
   productId: any; 
   products: Array<Products> = [];
+  filteredProducts: Array<Products> = [];
+  filter = { food: true, bathroom: true, cleaning: true };
   loggedInUser?: firebase.default.User | null;
   productObject?: Array<Products>;
 
@@ -49,6 +28,8 @@ export class StorageComponent implements OnInit {
   ngOnInit(): void {
     this.productsService.loadProducts().subscribe(data =>{
       this.products = data;
+      this.filteredProducts = this.products;
+      console.log(this.products);
     });
     
     this.authService.isUserLoggedIn().subscribe(user => {
@@ -65,5 +46,12 @@ export class StorageComponent implements OnInit {
 
    this.router.navigateByUrl('/storage-item');
   }
-  
+
+  filterChange() {
+    this.filteredProducts = this.products.filter(x => 
+       (x.category === 'Élelmiszer' && this.filter.food)
+       || (x.category === 'Fürdőszoba' && this.filter.bathroom)
+       || (x.category === 'Takarítás' && this.filter.cleaning)
+    );
+  }
 }
