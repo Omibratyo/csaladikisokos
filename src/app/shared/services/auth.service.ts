@@ -27,25 +27,6 @@ export class AuthService {
     public afs: AngularFirestore
   ) { this.user$ = afAuth.authState; }
 
-  login() {
-    this.afAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
-  }
-
-  GoogleAuth() {
-    return this.AuthLogin(new GoogleAuthProvider());
-  }
-  AuthLogin(provider: firebase.auth.AuthProvider) {
-    return this.afAuth
-    .signInWithPopup(provider)
-    .then((result) => {
-      this.router.navigateByUrl('');
-      console.log('You have been successfully logged in!');
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
-
   loginnew(email: string, password: string){
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }

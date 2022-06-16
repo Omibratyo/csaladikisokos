@@ -17,6 +17,7 @@ export class BsNavbarComponent implements OnInit {
   users: Array<User> = [];
   loggedInUser?: firebase.default.User | null;
   userObject?: Array<User>;
+  valami: any;
 
 
   constructor(private afAuth: AngularFireAuth, 
@@ -35,6 +36,8 @@ export class BsNavbarComponent implements OnInit {
     
     this.authService.isUserLoggedIn().subscribe(user => {
       this.loggedInUser = user;
+      this.valami = this.loggedInUser?.uid;
+      localStorage.setItem('uid', this.loggedInUser?.uid!);
     }, error => {
       console.error(error);
     });
@@ -43,5 +46,4 @@ export class BsNavbarComponent implements OnInit {
   logout(){
     this.authService.logout();
   }
-
 }

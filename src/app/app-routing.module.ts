@@ -17,6 +17,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from './shared/services/auth-guard.service';
 
 const routes: Routes = [
   { path: '' , component: HomeComponent},
@@ -24,15 +25,15 @@ const routes: Routes = [
   { path: 'signup' , component: SignupComponent},
   { path: 'bs-navbar' , component: BsNavbarComponent},
   { path: 'bs-sidebar' , component: BsSidebarComponent},
-  { path: 'bucket-list' , component: BucketListComponent},
-  { path: 'budget' , component: BudgetComponent},
-  { path: 'recipes' , component: RecipesComponent},
-  { path: 'shopping-list' , component: ShoppingListComponent},
-  { path: 'storage' , component: StorageComponent},
-  { path: 'storage-item' , component: StorageItemComponent},
-  { path: 'storage-item-add' , component: StorageItemAddComponent},
-  { path: 'storage-item-update' , component: StorageItemUpdateComponent},
-  { path: 'storage-missing-items' , component: StorageMissingItemsComponent},
+  { path: 'bucket-list' , component: BucketListComponent, canActivate: [AuthGuardService]},
+  { path: 'budget' , component: BudgetComponent, canActivate: [AuthGuardService]},
+  { path: 'recipes' , component: RecipesComponent, canActivate: [AuthGuardService]},
+  { path: 'shopping-list' , component: ShoppingListComponent, canActivate: [AuthGuardService]},
+  { path: 'storage' , component: StorageComponent, canActivate: [AuthGuardService]},
+  { path: 'storage-item' , component: StorageItemComponent, canActivate: [AuthGuardService]},
+  { path: 'storage-item-add' , component: StorageItemAddComponent, canActivate: [AuthGuardService]},
+  { path: 'storage-item-update' , component: StorageItemUpdateComponent, canActivate: [AuthGuardService]},
+  { path: 'storage-missing-items' , component: StorageMissingItemsComponent, canActivate: [AuthGuardService]},
   { path: 'food-storage' , component: FoodStorageComponent},
   { path: 'bathroom-storage' , component: BathroomStorageComponent},
   { path: 'cleaning-storage' , component: CleaningStorageComponent}

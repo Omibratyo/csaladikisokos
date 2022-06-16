@@ -1,3 +1,4 @@
+import { AuthGuardService } from './shared/services/auth-guard.service';
 import { SharingService } from './shared/services/sharing.service';
 import { ProductsService } from './shared/services/products.service';
 import { SignupComponent } from './pages/signup/signup.component';
@@ -96,7 +97,8 @@ import {MatSelectModule} from '@angular/material/select';
   providers: [
     AuthService, 
     UserService,
-    SharingService
+    SharingService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

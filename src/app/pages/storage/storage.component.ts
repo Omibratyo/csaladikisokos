@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Products } from 'src/app/shared/models/Products';
 import { ProductsService } from 'src/app/shared/services/products.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-storage',

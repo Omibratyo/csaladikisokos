@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.router.navigateByUrl('');
-    this.authService.login();
   }
 
   async loginnew() {
