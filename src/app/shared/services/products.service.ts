@@ -28,7 +28,6 @@ export class ProductsService {
 
   loadProducts(){
     this.valami = (localStorage.getItem('uid'));
-    console.log(this.valami);
     //return this.afs.collection<Products>(this.collectionName).valueChanges();
     return this.afs.collection<Products>(this.collectionName, ref => ref.where('user_id', '==', this.valami)).valueChanges();
   }

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { ProductsService } from '../../shared/services/products.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -18,7 +18,9 @@ interface Unit {
   templateUrl: './storage-item-add.component.html',
   styleUrls: ['./storage-item-add.component.css']
 })
-export class StorageItemAddComponent {
+export class StorageItemAddComponent implements OnInit {
+
+  valami: any;
 
   categories: Category[] = [
     {value: 'Élelmiszer', viewValue: 'Élelmiszer'},
@@ -47,6 +49,7 @@ export class StorageItemAddComponent {
     unit: new FormControl('',[Validators.required]),
     category: new FormControl('',[Validators.required]),
     description: new FormControl('',[Validators.required]),
+    user_id: new FormControl('')
   });
 
   createVal: any;
@@ -54,6 +57,10 @@ export class StorageItemAddComponent {
   constructor(
     private router: Router,
     private productsService: ProductsService ) {}
+
+  ngOnInit(): void {
+    this.valami = (localStorage.getItem('uid'));
+  }
 
  onSubmit(): void{
   if (this.createProductsForm.valid) {

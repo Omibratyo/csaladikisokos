@@ -92,7 +92,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatSelectModule,
     MatDividerModule,
     AngularFireStorageModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
   providers: [
     AuthService, 
