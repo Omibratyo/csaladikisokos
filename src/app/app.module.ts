@@ -88,7 +88,7 @@ import {MatSelectModule} from '@angular/material/select';
     FormsModule,
     BrowserAnimationsModule,
     MatIconModule,
-    MatCardModule, /** valami */
+    MatCardModule,
     MatSelectModule,
     MatDividerModule,
     AngularFireStorageModule,
