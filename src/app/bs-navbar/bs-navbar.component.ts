@@ -44,6 +44,7 @@ export class BsNavbarComponent implements OnInit {
   }
 
   logout(){
+    this.router.navigate(['/']);
     this.authService.logout();
   }
 }

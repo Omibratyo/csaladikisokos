@@ -35,7 +35,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" routerLink="/signup">Regisztráció</a>
+                <a *ngIf="!loggedInUser" class="nav-link text-white" routerLink="/signup">Regisztráció</a>
             </li>
         </ul>
         </div>

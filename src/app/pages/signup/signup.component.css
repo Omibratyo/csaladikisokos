@@ -38,3 +38,15 @@ button {
     display: inline - flex;
     vertical-align: middle;
 }
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+  mat-form-field {
+    width: 81%;
+    padding-left: 130px;
+}

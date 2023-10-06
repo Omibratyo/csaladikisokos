@@ -15,5 +15,12 @@ span {
 }
 
 mat-form-field {
-    width: 50%;
+    width: 30%;
 }
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }

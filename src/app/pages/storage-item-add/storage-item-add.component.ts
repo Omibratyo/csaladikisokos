@@ -28,6 +28,7 @@ export class StorageItemAddComponent implements OnInit {
     {value: 'Takarítás', viewValue: 'Takarítás'}
   ];
   units: Unit[] = [
+    {value: 'db', viewValue: 'db'},
     {value: 'mm', viewValue: 'mm'},
     {value: 'cm', viewValue: 'cm'},
     {value: 'dm', viewValue: 'dm'},
