@@ -4,12 +4,6 @@ div {
     text-align: center;
     height: 100%;
 }
-
-.main_component {
-    height: 100vh;
-    align-items: center;
-}
-
 span {
     padding: 5px 5px 5px 5px;
 }
@@ -18,9 +12,16 @@ mat-form-field {
     width: 30%;
 }
 
+mat-icon {
+    vertical-align: -6px;
+    padding-right: 30px;
+}
+
 .centered-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
   }
+  
+

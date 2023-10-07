@@ -46,7 +46,11 @@ button {
     height: 100vh;
 }
 
-  mat-form-field {
+mat-form-field {
     width: 81%;
     padding-left: 130px;
+}
+
+mat-icon {
+    padding-right: 30px;
 }

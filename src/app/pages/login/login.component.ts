@@ -51,4 +51,5 @@ export class LoginComponent implements OnInit {
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
+  
 }

@@ -46,6 +46,16 @@ export class AuthService {
   getAll() {
     return this.afs.collection<User>(this.collectionName).valueChanges();
   }
+
+  CurrentUser() {
+    return this.afAuth.user;
+  }
+
+  getUserById(id: string): Observable<User[]> {
+    return this.afs
+      .collection<User>(this.collectionName, (ref) => ref.where('id', '==', id))
+      .valueChanges()
+}
 }
 
 
