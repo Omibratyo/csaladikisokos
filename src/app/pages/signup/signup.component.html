@@ -5,46 +5,48 @@
             <mat-form-field>
                 <mat-icon matPrefix>email</mat-icon>
                 <mat-label for="email">Email cím: </mat-label>
-                <input matInput type="text" formControlName="email" required/>
+                <input matInput type="text" formControlName="email" required (input)="checkNameFields()"/>
             </mat-form-field>
-            <span class="error" *ngIf="email?.invalid && email?.touched">Az email cím érvénytelen!</span>
+            <span class="error text-danger"  *ngIf="email?.invalid && email?.touched">Az email cím érvénytelen!</span>
             <mat-form-field>
                 <mat-icon matPrefix>vpn_key</mat-icon>
                 <mat-label for="password">Jelszó: </mat-label>
-                <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password" minlength="6" required />
+                <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password" minlength="6" required (input)="checkNameFields()"/>
                 <mat-icon matSuffix (click)="togglePasswordVisibility()">
                     {{showPassword?'visibility_off':'visibility'}}
                 </mat-icon>
             </mat-form-field>
-            <div *ngIf="password?.hasError('minlength')">
+            <div *ngIf="password?.hasError('minlength')" class="text-danger">
                 Jelszónak legalább <a style="font-weight: bold;">6</a> hosszúságúnak kell lennie!
-           </div> 
+            </div> 
             <mat-form-field>
                 <mat-icon matPrefix>lock</mat-icon>
                 <mat-label for="rePassword">Jelszó megerősítése: </mat-label>
-                <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="rePassword" minlength="6" required/>
+                <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="rePassword" minlength="6" required (input)="checkNameFields()"/>
                 <mat-icon matSuffix (click)="togglePasswordVisibility()">
                     {{showPassword?'visibility_off':'visibility'}}
                 </mat-icon>
             </mat-form-field>
             <div *ngIf="rePassword?.value != password?.value" class="text-danger">
                 A jelszavaknak nem egyeznek!
-           </div> 
+            </div> 
             <div formGroupName="name" class="subForm">
                 <mat-form-field>
                     <mat-icon matPrefix>person</mat-icon>
                     <mat-label for="firstname">Keresztnév:</mat-label>
-                    <input matInput type="text" formControlName="firstname"/>
+                    <input matInput type="text" formControlName="firstname" required (input)="firstnameTouched = true" (input)="checkNameFields()"/>
                 </mat-form-field>
+                <span class="error text-danger" *ngIf="firstnameTouched && signUpForm.get('name.firstname')?.value.length === 0">A keresztnév megadása kötelező!</span>
                 <mat-form-field>
                     <mat-icon matPrefix>person</mat-icon>
                     <mat-label for="firstname">Vezetéknév: </mat-label>
-                    <input matInput type="text" formControlName="lastname"/>
+                    <input matInput type="text" formControlName="lastname" required (input)="lastnameTouched = true" (input)="checkNameFields()"/>
                 </mat-form-field>
+                <span class="error text-danger" *ngIf="lastnameTouched && signUpForm.get('name.lastname')?.value.length === 0">A vezetéknév megadása kötelező!</span>
             </div>
             <div>
                 <span class="buttons">
-                    <button mat-raised-button class="btn btn-success" type="submit">Regisztráció</button>
+                    <button mat-raised-button class="btn btn-success" type="submit" [disabled]="!registrationAllowed">Regisztráció</button>
                 </span><span class="buttons">
                     <button mat-raised-button class="btn btn-success" (click)="goBack()">Visszalépés</button>
                 </span>

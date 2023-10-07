@@ -14,6 +14,7 @@ import { AuthService } from '../../../app/shared/services/auth.service';
 export class LoginComponent implements OnInit {
 
   public showPassword: boolean = false;
+  registrationAllowed = false;
 
   email = new FormControl('');
   password = new FormControl('');
@@ -50,6 +51,14 @@ export class LoginComponent implements OnInit {
 
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  checkNameFields() {
+    const email = this.email.value;
+    const password = this.password.value;
+    
+    // Az űrlap engedélyezése csak akkor történik meg, ha mindkét mező kitöltve van
+    this.registrationAllowed = email.length > 0 && password.length > 0;
   }
   
 }

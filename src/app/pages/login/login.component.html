@@ -5,18 +5,22 @@
 <div class="centered-container">
     <mat-form-field>
         <mat-icon matPrefix>email</mat-icon>
-        <mat-label for="email">Email cím: </mat-label><input matInput type="text" [formControl]="email" required/>
+        <mat-label for="email">Email cím: </mat-label><input matInput type="text" [formControl]="email" required (input)="checkNameFields()"/>
     </mat-form-field>
+    <span class="error text-danger"  *ngIf="email?.invalid && email?.touched">Az email cím érvénytelen!</span>
     <mat-form-field>
         <mat-icon matPrefix>vpn_key</mat-icon>
         <mat-label for="password">Jelszó: </mat-label>
-        <input matInput [type]="showPassword ? 'text' : 'password'" [formControl]="password" required/>
+        <input matInput [type]="showPassword ? 'text' : 'password'" minlength="1" [formControl]="password" required (input)="checkNameFields()"/>
         <mat-icon matSuffix (click)="togglePasswordVisibility()">
             {{showPassword?'visibility_off':'visibility'}}
         </mat-icon>
     </mat-form-field>
+    <!--<div *ngIf="password.length < 1" class="text-danger">
+        Jelszómegadása kötelező!
+    </div>--> 
     <span>
-        <span><button mat-raised-button class="btn btn-success" (click)="loginnew()">Belépés</button></span>
+        <span><button mat-raised-button class="btn btn-success" (click)="loginnew()" [disabled]="!registrationAllowed">Belépés</button></span>
         <span><button mat-raised-button class="btn btn-success" [routerLink]="'/signup'">Regisztráció</button></span>
     </span>
 </div>

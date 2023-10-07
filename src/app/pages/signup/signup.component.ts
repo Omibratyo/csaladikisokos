@@ -14,14 +14,18 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
   public showPassword: boolean = false;
+  firstnameTouched = false;
+  lastnameTouched = false;
+  registrationAllowed = false;
+
 
   signUpForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
     password: new FormControl('' , Validators.minLength(6)),
     rePassword: new FormControl('', Validators.minLength(6)),
     name: new FormGroup({
-      firstname: new FormControl(''),
-      lastname: new FormControl('')
+      firstname: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required])
     })
   });
 
@@ -53,6 +57,17 @@ export class SignupComponent implements OnInit {
     });
   }
 
+  checkNameFields() {
+    const firstname = this.signUpForm.get('name.firstname')!.value;
+    const lastname = this.signUpForm.get('name.lastname')!.value;
+    const email = this.signUpForm.get('email')!.value;
+    const password = this.signUpForm.get('password')!.value;
+    const rePassword = this.signUpForm.get('rePassword')!.value;
+    
+    // Az űrlap engedélyezése csak akkor történik meg, ha mindkét mező kitöltve van
+    this.registrationAllowed = firstname.length > 0 && lastname.length > 0 && email.length > 0 && password.length > 0 && rePassword.length > 0;
+  }
+
   goBack() {
     this.location.back();
   }
@@ -67,6 +82,10 @@ export class SignupComponent implements OnInit {
 
   get email() {
     return this.signUpForm.get('email');
+  }
+
+  get firstname() {
+    return this.signUpForm.get('firstname');
   }
 
   public togglePasswordVisibility(): void {
