@@ -46,7 +46,10 @@ import { FoodStorageComponent } from './pages/food-storage/food-storage.componen
 import { BathroomStorageComponent } from './pages/bathroom-storage/bathroom-storage.component';
 import { CleaningStorageComponent } from './pages/cleaning-storage/cleaning-storage.component';
 import { BsSidebarComponent } from './bs-sidebar/bs-sidebar.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule} from '@angular/material/select';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -67,7 +70,8 @@ import {MatSelectModule} from '@angular/material/select';
     FoodStorageComponent,
     BathroomStorageComponent,
     CleaningStorageComponent,
-    BsSidebarComponent
+    BsSidebarComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +95,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatCardModule,
     MatSelectModule,
     MatDividerModule,
+    MatDialogModule,
     AngularFireStorageModule,
     Ng2SearchPipeModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
