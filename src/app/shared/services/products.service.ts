@@ -48,5 +48,13 @@ export class ProductsService {
     products.id = this.afs.createId();
     return this.afs.collection<Products>(this.collectionName).doc(products.id).set(products);
   }
+
+  /**loadImageMeta(metaUrl: string): Observable<Array<Products>> {
+    return this.afs.collection<Products>(this.collectionName).valueChanges();
+  }
+
+  loadImage(imageUrl: string) {
+    return this.storage.ref(imageUrl).getDownloadURL();
+  }*/
 }
 

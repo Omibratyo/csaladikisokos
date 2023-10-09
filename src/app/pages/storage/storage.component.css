@@ -112,10 +112,16 @@ h3 {
 }
 
 .section-products #product-1 .part-1::before {
-    background: url("../../../assets/grocery.jpg") no-repeat center;
     background-size: cover;
-		transition: all 0.3s;
-}
+    transition: all 0.3s;
+  }
+  
+.product-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }  
 
 .section-products .single-product .part-1 .discount,
 .section-products .single-product .part-1 .new {

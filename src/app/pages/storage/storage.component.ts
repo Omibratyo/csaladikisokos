@@ -6,6 +6,7 @@ import { ProductsService } from 'src/app/shared/services/products.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-storage',
@@ -24,7 +25,8 @@ export class StorageComponent implements OnInit {
   constructor(private router: Router,
     private productsService: ProductsService,
     private SharingService: SharingService,
-    private authService: AuthService
+    private authService: AuthService,
+    private storage: AngularFireStorage
     ) { }
 
   ngOnInit(): void {
@@ -34,17 +36,25 @@ export class StorageComponent implements OnInit {
       console.log(this.products);
     });
     
-    this.authService.isUserLoggedIn().subscribe(user => {
-      this.loggedInUser = user;
-    }, error => {
+    this.authService.isUserLoggedIn().subscribe(
+      user => {
+          this.loggedInUser = user;
+    }, 
+    (error) => {
       console.error(error);
-    });
+      }
+    );
   }
 
   getProductsId(product: any){
     this.productId = product.id;
     this.SharingService.setData(this.productId);
     console.log(this.productId);
+
+    const storageRef = this.storage.ref('images/' + product.image_url);
+    storageRef.getDownloadURL().subscribe((url) => {
+      product.image_url = url;
+    });
 
    this.router.navigateByUrl('/storage-item');
   }
