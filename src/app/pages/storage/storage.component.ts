@@ -17,6 +17,7 @@ export class StorageComponent implements OnInit {
 
   productId: any; 
   products: Array<Products> = [];
+  productImages: Array<string> = [];
   filteredProducts: Array<Products> = [];
   filter = { food: true, bathroom: true, cleaning: true };
   loggedInUser?: firebase.default.User | null;
@@ -34,6 +35,8 @@ export class StorageComponent implements OnInit {
       this.products = data;
       this.filteredProducts = this.products;
       console.log(this.products);
+
+      this.loadProductImages();
     });
     
     this.authService.isUserLoggedIn().subscribe(
@@ -44,6 +47,16 @@ export class StorageComponent implements OnInit {
       console.error(error);
       }
     );
+  }
+
+  loadProductImages() {
+    for (const product of this.products) {
+      const storageRef = this.storage.ref('images/' + product.image_url);
+      storageRef.getDownloadURL().subscribe((url) => {
+        // A letöltött URL-eket elmentjük a productImages tömbbe
+        this.productImages.push(url);
+      });
+    }
   }
 
   getProductsId(product: any){
