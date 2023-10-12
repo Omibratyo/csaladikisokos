@@ -23,7 +23,7 @@
                                         </ul>
                                 </div>
                                 <div class="part-2" class="col-md-8 col-lg-6">
-                                        <div class="product-image" [ngStyle]="{'background-image': 'url(' + productImages[i] + ')'}"></div>
+                                        <div class="product-image" *ngIf="productImages[i]" [ngStyle]="{'background-image': 'url(' + productImages[i] + ')'}"></div>
                                         <h3 class="product-title">{{ product.image_url }}</h3>
                                         <h3 class="product-title">{{ product.title }}</h3>
                                         <h3 class="product-title">{{ product.quantity}} {{product.unit}}</h3>

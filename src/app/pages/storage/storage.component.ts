@@ -55,6 +55,7 @@ export class StorageComponent implements OnInit {
       storageRef.getDownloadURL().subscribe((url) => {
         // A letöltött URL-eket elmentjük a productImages tömbbe
         this.productImages.push(url);
+        console.log(this.productImages);
       });
     }
   }
