@@ -53,7 +53,7 @@
                     <input matInput type="text" class="line color" formControlName="user_id" [(ngModel)]="valami" readonly>
                 </mat-form-field>
                 <mat-card-actions>
-                    <input type="file" (change)="onFileSelected($event)">
+                    <input type="file" formControlName="image_url" (change)="chooseImgToUpload($event)">
                     <button mat-raised-button type="button" (click)="onSubmit()" [disabled]="!createProductsForm.valid" [routerLink]="'/storage'">Elem hozzáadása</button>
                 </mat-card-actions>
             </form>

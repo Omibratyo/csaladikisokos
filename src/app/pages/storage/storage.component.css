@@ -60,6 +60,7 @@ a,a:hover {
 }
 
 h3 {
+    padding-top: 10px;
     font-size: 25px;
 }
 
@@ -90,8 +91,8 @@ h3 {
 
 .section-products .single-product .part-1 {
     position: relative;
-    height: 250px;
-    max-height: 250px;
+    height: 315px;
+    max-height: 315px;
     margin-bottom: 10px;
     overflow: hidden;
 }
@@ -115,14 +116,25 @@ h3 {
     background-size: cover;
     transition: all 0.3s;
   }
-  
+
 .product-image {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: -webkit-fill-available;
     background-size: cover;
     background-repeat: no-repeat;
   }  
 
+.kepmid {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.eiffel {
+    height: 230px;
+}
+.tower {
+    height: 100px;
+}
 .section-products .single-product .part-1 .discount,
 .section-products .single-product .part-1 .new {
     position: absolute;
@@ -180,6 +192,7 @@ h3 {
 
 .section-products .single-product .part-2 .product-title {
     font-size: 1rem;
+    border-top: 100px;
 }
 
 .section-products .single-product .part-2 h4 {
@@ -199,7 +212,7 @@ h3 {
 }
 
 h3, h4 {
-    width: 225px;
+    width: 249.5px;
 }
 input {
     border-width: 3px;
