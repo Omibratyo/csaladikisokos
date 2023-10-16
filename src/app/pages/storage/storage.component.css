@@ -3,6 +3,10 @@
 .container-fluid {
     margin-top: 50px;
 }
+
+.container {
+    margin-left: 0px;
+}
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -52,11 +56,6 @@ body {
     font-family: "Poppins", sans-serif;
     color: #444444;
     overflow-x: hidden;
-}
-
-a,a:hover {
-    text-decoration: none;
-    color: inherit;
 }
 
 h3 {
@@ -119,9 +118,11 @@ h3 {
 
 .product-image {
     width: auto;
-    height: -webkit-fill-available;
+    height: 230px;
     background-size: cover;
     background-repeat: no-repeat;
+    overflow: hidden;
+
   }  
 
 .kepmid {
@@ -152,43 +153,12 @@ h3 {
     background-color: #444444;
 }
 
-.section-products .single-product .part-1 ul {
-    position: absolute;
-    bottom: -41px;
-    left: 20px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    opacity: 0;
-    transition: bottom 0.5s, opacity 0.5s;
-}
-
-.section-products .single-product:hover .part-1 ul {
-    bottom: 55px;
-    opacity: 1;
-}
 
 .section-products .single-product .part-1 ul li {
     display: inline-block;
     margin-right: 4px;
 }
 
-.section-products .single-product .part-1 ul li a {
-    display: inline-block;
-    width: 35px;
-    height: 28px;
-    line-height: 40px;
-    background-color: black;
-    color: white;
-    text-align: center;
-    box-shadow: 0 2px 20px rgb(50 50 50 / 10%);
-    transition: color 0.2s;
-}
-
-.section-products .single-product .part-1 ul li a:hover {
-    color:#198754;
-    cursor: pointer;
-}
 
 .section-products .single-product .part-2 .product-title {
     font-size: 1rem;
@@ -214,7 +184,14 @@ h3 {
 h3, h4 {
     width: 249.5px;
 }
-input {
+
+.search {
+    margin-right: 320px;
+    border-width: 3px;
+    border-color: black;
+    width: 300px;
+}
+.pipa {
     border-width: 3px;
     border-color: black;
     margin-bottom: 50px;
@@ -234,8 +211,13 @@ button {
     color: white;
     cursor:pointer;
 }
+
+.ul_checkbox {
+    margin-left: 0;
+}
+
 .ul_checkbox ul {
-    padding: 0px 0px 10px 420px;
+    padding: 0px 0px 10px 0px;
     margin: 0px;
 }
 .ul_checkbox ul li {
@@ -247,6 +229,43 @@ button {
 }
 ul,li {
     height: 0px;
-    padding: 15px;
+    padding: 0px;
     font-size: 19px;
+}
+
+.product-image-wrapper {
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.product-image-wrapper:hover {
+    transform: scale(1) rotate(4deg);
+}
+
+.product-image-wrapper img {
+    display: block;
+    object-fit: contain;
+    position: relative;
+}
+
+.product-image-wrapper .icon-hidden {
+    position: absolute;
+    top: 5px;
+    left: 30%;
+    font-size: 24px;
+    z-index: 1;
+    color:white;
+    cursor: pointer;
+    background-color: black;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding-top: 3px;
+    opacity: 0;
+    transition: transform 0.3s, visibility 0.3s;
+}
+
+.product-image-wrapper:hover .icon-hidden {
+    transform: translateY(185px);
+    opacity: 1;
 }

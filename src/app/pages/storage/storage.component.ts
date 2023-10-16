@@ -22,6 +22,7 @@ export class StorageComponent implements OnInit {
   filter = { food: true, bathroom: true, cleaning: true };
   loggedInUser?: firebase.default.User | null;
   productObject?: Array<Products>;
+  searchText: any;
 
   constructor(private router: Router,
     private productsService: ProductsService,

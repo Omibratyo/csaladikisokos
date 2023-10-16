@@ -2,10 +2,11 @@
         <div class="container">
                 <div class="ul_checkbox">
                         <ul>
+                                <input class="search" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Keresés">    
                                 <li>
-                                        <input type="checkbox" [(ngModel)]="filter.food" (ngModelChange)="filterChange()" /> Élelmiszer 
-                                        <input type="checkbox" [(ngModel)]="filter.bathroom" (ngModelChange)="filterChange()" /> Fürdőszoba 
-                                        <input type="checkbox" [(ngModel)]="filter.cleaning" (ngModelChange)="filterChange()" /> Takarítás
+                                        <input class="pipa" type="checkbox" [(ngModel)]="filter.food" (ngModelChange)="filterChange()" /> Élelmiszer 
+                                        <input class="pipa" type="checkbox" [(ngModel)]="filter.bathroom" (ngModelChange)="filterChange()" /> Fürdőszoba 
+                                        <input class="pipa" type="checkbox" [(ngModel)]="filter.cleaning" (ngModelChange)="filterChange()" /> Takarítás
                                 </li>
                         </ul>
                 </div>
@@ -15,17 +16,17 @@
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 col-lg-3 col-xl-2 kepmid" *ngFor="let product of filteredProducts; let i = index">
+                <div class="col-md-6 col-lg-3 col-xl-2 kepmid" *ngFor="let product of filteredProducts | filter:searchText; let i = index">
                         <div id="product-1" class="single-product">
                                 <div class="part-1">    
-                                        <ul class="part-1">
-                                                <li><a (click)="getProductsId(product)"><mat-icon>open_in_new</mat-icon></a></li>
-                                        </ul>
                                         <div class="part-2" class="col-md-8 col-lg-6 tower">
-                                                <div><img class="product-image eiffel" src="{{ product.image_url}}" alt="Product Image"/></div>
+                                                <div class="product-image-wrapper">
+                                                    <img class="product-image eiffel" src="{{ product.image_url }}" alt="Product Image"/>
+                                                    <mat-icon (click)="getProductsId(product)" class="icon-hidden">open_in_new</mat-icon>
+                                                </div>
                                                 <h3 class="product-title">{{ product.title }}</h3>
-                                                <h3 class="product-title">{{ product.quantity}} {{product.unit}}</h3>
-                                        </div>
+                                                <h3 class="product-title">{{ product.quantity }} {{ product.unit }}</h3>
+                                        </div> 
                                 </div>
                         </div>
                 </div>
