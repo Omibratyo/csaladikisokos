@@ -80,7 +80,7 @@ h3 {
 .section-products .header h2 {
     font-size: 2.2rem;
     font-weight: 400;
-    color: #444444; 
+    color: #444444;
 }
 
 .section-products .single-product {
@@ -187,10 +187,11 @@ h3, h4 {
 
 .search {
     margin-right: 320px;
-    border-width: 3px;
-    border-color: black;
+    border: 3px solid black;
     width: 300px;
+    outline: none;
 }
+
 .pipa {
     border-width: 3px;
     border-color: black;
@@ -201,6 +202,7 @@ h3, h4 {
 input:checked {
     accent-color: #198754;
 }
+
 button {
     float: right;
     margin: 5px 20px 0px;
