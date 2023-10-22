@@ -49,6 +49,8 @@ import { BsSidebarComponent } from './bs-sidebar/bs-sidebar.component';
 import { MatSelectModule} from '@angular/material/select';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import {Sort, MatSortModule} from '@angular/material/sort';
 
 
 @NgModule({
@@ -99,7 +101,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule,
     AngularFireStorageModule,
     Ng2SearchPipeModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    CanvasJSAngularChartsModule,
+    MatSortModule
   ],
   providers: [
     AuthService, 

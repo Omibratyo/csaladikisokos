@@ -16,10 +16,10 @@
                     <a class="nav-link text-white" routerLink="/shopping-list">Bevásárlólista</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" routerLink="/shopping-list">Bakancslista</a>
+                    <a class="nav-link text-white" routerLink="/bucket-list">Bakancslista</a>
                 </li> 
                 <li class="nav-item">
-                    <a class="nav-link text-white" routerLink="/shopping-list">Kiadásfigyelő</a>
+                    <a class="nav-link text-white" routerLink="/budget">Kiadásfigyelő</a>
                 </li>    
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
@@ -29,7 +29,9 @@
                 </li>
             </ng-template>
             <li ngbDropdown *ngIf="authService.user$ | async as user; else anonymousUser" class="nav-item dropdown">
-                <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ loggedInUser![0].name.firstname + ' ' +  loggedInUser![0].name.lastname}}</a>
+                <a ngbDropdownToggle *ngIf="loggedInUser && loggedInUser.length > 0" class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ loggedInUser[0].name.firstname + ' ' +  loggedInUser[0].name.lastname}}
+                  </a>                  
                 <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" (click)="logout()">Kijelentkezés</a>
                 </div>

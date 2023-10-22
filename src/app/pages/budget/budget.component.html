@@ -1,1 +1,15 @@
-<p>budget works!</p>
+<div class="table-container">
+    <table matSort (matSortChange)="sortData($event)">
+      <tr class="header-row">
+        <th mat-sort-header="category">Kategória</th>
+        <th mat-sort-header="price">Ár</th>
+      </tr>
+    
+      <tr *ngFor="let cost of sortedData">
+        <td>{{ cost.category }}</td>
+        <td>{{ cost.price | currency: 'HUF' }}</td>
+      </tr>
+    </table>
+</div>
+
+

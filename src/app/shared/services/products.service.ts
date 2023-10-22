@@ -21,9 +21,6 @@ export class ProductsService {
 
   constructor(
     private afs: AngularFirestore,
-    private storage: AngularFireStorage,
-    private sharingService: SharingService,
-    private authService: AuthService,
     private db: AngularFireDatabase
   ) { }
 
