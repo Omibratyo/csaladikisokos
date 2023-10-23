@@ -4,7 +4,6 @@
         <th mat-sort-header="category">Kategória</th>
         <th mat-sort-header="price">Ár</th>
       </tr>
-    
       <tr *ngFor="let cost of sortedData">
         <td>{{ cost.category }}</td>
         <td>{{ cost.price | currency: 'HUF' }}</td>

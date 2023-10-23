@@ -1,25 +1,29 @@
 .mat-sort-header-container {
     align-items: center;
+    justify-content: center;
 }
 
 .table-container {
-    flex-direction: column;
-    align-items: center;
     text-align: center;
-    padding-top: 15px;
-    justify-content: center;
+    margin-top: 15px;
+    max-height: 184px;
+    overflow: auto;
+    max-width: 60%;
+    margin-left: 20%;
 }
 
 table {
     border-collapse: collapse;
-    width: 60%; /* Adjust the width as needed */
+    width: 100%; /* Adjust the width as needed */
     margin: 0 auto; /* Center the table horizontally */
     border: 2px solid #198754;
+    display: table;
 }
 
 tr {
     background-color: #f2f2f2;
     border: 2px solid #198754;
+    display: table-row;
 }
 
 
@@ -27,6 +31,7 @@ tr {
     background-color: #198754;
     color: white;
     border: 2px solid #198754;
+    display: table-cell;
 }
 
 .header-row th:first-child {
@@ -47,4 +52,9 @@ td {
 
 ::ng-deep .mat-sort-header-arrow {
     color: white;
+  }
+
+::ng-deep .mat-sort-header-container {
+    display:flex;
+    justify-content:center;
   }
