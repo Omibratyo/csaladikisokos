@@ -1,18 +1,13 @@
 .mat-sort-header-container {
-    display: flex;
-    cursor: pointer;
     align-items: center;
-    letter-spacing: normal;
-    outline: 0;
-    justify-content: center;
 }
 
 .table-container {
-    display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding-top: 15px;
+    justify-content: center;
 }
 
 table {
@@ -26,6 +21,7 @@ tr {
     background-color: #f2f2f2;
     border: 2px solid #198754;
 }
+
 
 .header-row th {
     background-color: #198754;
