@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Costs } from 'src/app/shared/models/Costs';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import {Sort, MatSortModule} from '@angular/material/sort';
-
+import { Sort } from '@angular/material/sort';
+import * as CanvasJS from 'canvasjs';
 
 @Component({
   selector: 'app-budget',
@@ -12,25 +12,36 @@ import {Sort, MatSortModule} from '@angular/material/sort';
   styleUrls: ['./budget.component.css'],
 })
 export class BudgetComponent implements OnInit {
-
-  costId: any; 
+  
+  costId: any;
   costs: Array<Costs> = [];
   loggedInUser?: firebase.default.User | null;
   sortedData: Costs[];
+  chartOptions: any;
+  columnChartOptions: any;
+  chart: any;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private costsService: CostsService,
-    private authService: AuthService,
-  ) { this.sortedData = this.costs.slice(); }
+    private authService: AuthService
+  ) {
+    this.sortedData = this.costs.slice();
+    this.chartOptions = this.getChartOptions();
+    this.columnChartOptions = this.getColumnChartOptions();
+  }
 
   ngOnInit(): void {
-    this.costsService.loadCosts().subscribe(data => {
+    this.costsService.loadCosts().subscribe((data) => {
       this.costs = data;
       this.sortedData = this.costs.slice();
+      this.chartOptions = this.getChartOptions();
+      this.updateColumnChart();
+      this.renderColumnChart();
     });
 
     this.authService.isUserLoggedIn().subscribe(
-      user => {
+      (user) => {
         this.loggedInUser = user;
       },
       (error) => {
@@ -57,6 +68,66 @@ export class BudgetComponent implements OnInit {
           return 0;
       }
     });
+    this.chartOptions.data[0].dataPoints = this.sortedData.map((cost) => ({
+      y: cost.price,
+      name: cost.category,
+    }));
+    this.columnChartOptions.data[0].dataPoints = this.sortedData.map((cost) => ({
+      label: cost.category,
+      y: cost.price,
+    }));
+    this.updateColumnChart();
+  }
+
+  private getColumnChartOptions() {
+    return {
+      animationEnabled: true,
+      title: {
+        text: "Column Chart Title",
+      },
+      data: [
+        {
+          type: "column",
+          dataPoints: this.sortedData.map((cost) => ({
+            label: cost.category,
+            y: cost.price,
+          })),
+        },
+      ],
+    };
+  }
+
+  updateColumnChart() {
+    this.columnChartOptions.data[0].dataPoints = this.sortedData.map((cost) => ({
+      label: cost.category,
+      y: cost.price,
+    }));
+  }
+  
+  renderColumnChart() {
+    this.chart = new CanvasJS.Chart("columnChartContainer", this.columnChartOptions);
+    this.chart.render();
+  }
+
+  private getChartOptions() {
+    return {
+      animationEnabled: true,
+      title: {
+        text: "Kiadás diagram",
+      },
+      data: [
+        {
+          type: "pie",
+          startAngle: -90,
+          indexLabel: "{name}: {y}",
+          yValueFormatString: "'HUF'#,###.##",
+          dataPoints: this.sortedData.map((cost) => ({
+            y: cost.price,
+            name: cost.category,
+          })),
+        },
+      ],
+    };
   }
 }
 
