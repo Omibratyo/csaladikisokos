@@ -12,7 +12,6 @@ import * as CanvasJS from 'canvasjs';
   styleUrls: ['./budget.component.css'],
 })
 export class BudgetComponent implements OnInit {
-  
   costId: any;
   costs: Array<Costs> = [];
   loggedInUser?: firebase.default.User | null;
@@ -36,8 +35,7 @@ export class BudgetComponent implements OnInit {
       this.costs = data;
       this.sortedData = this.costs.slice();
       this.chartOptions = this.getChartOptions();
-      this.updateColumnChart();
-      this.renderColumnChart();
+      this.columnChartOptions = this.getColumnChartOptions();
     });
 
     this.authService.isUserLoggedIn().subscribe(
@@ -72,22 +70,23 @@ export class BudgetComponent implements OnInit {
       y: cost.price,
       name: cost.category,
     }));
-    this.columnChartOptions.data[0].dataPoints = this.sortedData.map((cost) => ({
-      label: cost.category,
-      y: cost.price,
-    }));
-    this.updateColumnChart();
+    this.columnChartOptions.data[0].dataPoints = this.sortedData.map(
+      (cost) => ({
+        label: cost.category,
+        y: cost.price,
+      })
+    );
   }
 
   private getColumnChartOptions() {
     return {
       animationEnabled: true,
       title: {
-        text: "Column Chart Title",
+        text: 'Column Chart Title',
       },
       data: [
         {
-          type: "column",
+          type: 'column',
           dataPoints: this.sortedData.map((cost) => ({
             label: cost.category,
             y: cost.price,
@@ -97,29 +96,17 @@ export class BudgetComponent implements OnInit {
     };
   }
 
-  updateColumnChart() {
-    this.columnChartOptions.data[0].dataPoints = this.sortedData.map((cost) => ({
-      label: cost.category,
-      y: cost.price,
-    }));
-  }
-  
-  renderColumnChart() {
-    this.chart = new CanvasJS.Chart("columnChartContainer", this.columnChartOptions);
-    this.chart.render();
-  }
-
   private getChartOptions() {
     return {
       animationEnabled: true,
       title: {
-        text: "Kiadás diagram",
+        text: 'Kiadás diagram',
       },
       data: [
         {
-          type: "pie",
+          type: 'pie',
           startAngle: -90,
-          indexLabel: "{name}: {y}",
+          indexLabel: '{name}: {y}',
           yValueFormatString: "'HUF'#,###.##",
           dataPoints: this.sortedData.map((cost) => ({
             y: cost.price,
