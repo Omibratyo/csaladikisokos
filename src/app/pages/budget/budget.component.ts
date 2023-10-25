@@ -116,6 +116,11 @@ export class BudgetComponent implements OnInit {
       ],
     };
   }
+
+
+  delete(id: string){
+    this.costsService.delete(id);
+  }
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {

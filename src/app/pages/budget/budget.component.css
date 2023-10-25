@@ -42,6 +42,16 @@ tr {
     border-left: 2px solid white; /* Left border of the last th */
 }
 
+td:last-child {
+    max-width: 7px;
+}
+
+mat-icon {
+    top: 3px;
+    display: table-cell;
+    cursor: pointer;
+}
+
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
