@@ -24,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
@@ -51,6 +52,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import {Sort, MatSortModule} from '@angular/material/sort';
+import { BudgetAddComponent } from './pages/budget-add/budget-add.component';
 
 
 @NgModule({
@@ -73,7 +75,8 @@ import {Sort, MatSortModule} from '@angular/material/sort';
     BathroomStorageComponent,
     CleaningStorageComponent,
     BsSidebarComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    BudgetAddComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +106,8 @@ import {Sort, MatSortModule} from '@angular/material/sort';
     Ng2SearchPipeModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     CanvasJSAngularChartsModule,
-    MatSortModule
+    MatSortModule,
+    MatTooltipModule
   ],
   providers: [
     AuthService, 

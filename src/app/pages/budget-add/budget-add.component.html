@@ -1,0 +1,33 @@
+<div class="main_component">
+    <div class="div-flex">
+    <h1>Kiadás hozzáadása</h1>
+        <form [formGroup]="createCostsForm" novalidate class="example-container">
+            <mat-form-field>
+                <mat-icon matPrefix>euro_symboly</mat-icon>
+                <mat-label  for="title">Ár megadása: </mat-label>
+                <div class="currency-input-wrapper">
+                    <span class="currency-label">HUF</span>
+                    <input matInput type="number" class="line" formControlName="price" required>
+                  </div>
+                <div class="middle" *ngIf="price?.errors?.['required'] && price?.touched">
+                    Ár megadása kötelező!
+                </div>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-icon matPrefix>category</mat-icon>
+                <mat-label for="category">Kategória</mat-label>
+                <mat-select class="line" formControlName="category" name="category" required>
+                    <mat-option *ngFor="let category of categories" [value]="category.value">
+                    {{category.viewValue}}
+                    </mat-option>
+                </mat-select>
+                <div class="middle" *ngIf="category?.errors?.['required'] && category?.touched">
+                    Kategória megadása kötelező!
+                </div>
+            </mat-form-field>
+            <mat-card-actions>
+                <button mat-raised-button type="button" (click)="onSubmit()" [disabled]="!createCostsForm.valid" [routerLink]="'/budget'">Elem hozzáadása</button>
+            </mat-card-actions>
+        </form>
+    </div>
+</div>

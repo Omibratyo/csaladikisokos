@@ -10,12 +10,33 @@
     overflow: auto;
     max-width: 60%;
     margin-left: 20%;
+    position: relative;
+}
+
+th {
+    background-color: #198754;
+    color: white;
+    display: table;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+
+th::before, th::after {
+    background-color: #198754;
+    position: absolute;
+    width: 2px;
+    top: 0;
+    bottom: 0;
+    border: 2px solid white;
 }
 
 table {
-    border-collapse: collapse;
-    width: 100%; /* Adjust the width as needed */
-    margin: 0 auto; /* Center the table horizontally */
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin: 0 auto;
     border: 2px solid #198754;
     display: table;
 }
@@ -35,11 +56,17 @@ tr {
 }
 
 .header-row th:first-child {
-    border-right: 2px solid white; /* Right border of the first th */
+    border-right: 2px solid white;
+}
+
+.header-row th:nth-child(2) {
+    border-right: 2px solid white;
+    border-left: 2px solid white; 
 }
 
 .header-row th:last-child {
-    border-left: 2px solid white; /* Left border of the last th */
+    border-left: 2px solid white;
+    width: 20px;
 }
 
 td:last-child {
@@ -50,6 +77,15 @@ mat-icon {
     top: 3px;
     display: table-cell;
     cursor: pointer;
+    width: 35px;
+    color: black;
+}
+
+::ng-deep .mat-tooltip {
+    background-color: #198754;
+    font-size: 14px;
+    padding: 7px 12px;
+    border-radius: 6px;
 }
 
 tr:nth-child(even) {
@@ -57,7 +93,7 @@ tr:nth-child(even) {
 }
 
 td {
-    border: 2px solid #198754;
+    border: 1.5px solid #198754;
 }
 
 ::ng-deep .mat-sort-header-arrow {

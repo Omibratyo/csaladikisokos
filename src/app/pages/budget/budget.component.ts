@@ -1,9 +1,11 @@
+import { BudgetAddComponent } from './../budget-add/budget-add.component';
 import { CostsService } from './../../shared/services/costs.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Costs } from 'src/app/shared/models/Costs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Sort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 import * as CanvasJS from 'canvasjs';
 
 @Component({
@@ -23,7 +25,8 @@ export class BudgetComponent implements OnInit {
   constructor(
     private router: Router,
     private costsService: CostsService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {
     this.sortedData = this.costs.slice();
     this.chartOptions = this.getChartOptions();
@@ -46,6 +49,19 @@ export class BudgetComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  openBudgetAddDialog() {
+    const dialogRef = this.dialog.open(BudgetAddComponent, {
+      width: '500px', // Specify the desired width
+      data: { /* Pass any data you want to the dialog */ }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Handle the result from the dialog (if needed)
+      }
+    });
   }
 
   sortData(sort: Sort) {
@@ -117,10 +133,18 @@ export class BudgetComponent implements OnInit {
     };
   }
 
+  delete(cost: Costs) {
+    this.costsService.delete(cost.id).then(() => {
+      this.costs = this.costs.filter(c => c.id !== cost.id);
+      this.sortedData = this.costs.slice();
+      this.chartOptions = this.getChartOptions();
+      this.columnChartOptions = this.getColumnChartOptions();
 
-  delete(id: string){
-    this.costsService.delete(id);
+    }).catch(error => {
+      console.error('Error deleting item: ', error);
+    });
   }
+  
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {

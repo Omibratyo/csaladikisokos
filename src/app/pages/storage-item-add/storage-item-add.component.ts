@@ -11,7 +11,6 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage';
-import { finalize } from 'rxjs/operators';
 
 interface Category {
   value: string;
