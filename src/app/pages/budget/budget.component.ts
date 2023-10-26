@@ -29,16 +29,16 @@ export class BudgetComponent implements OnInit {
     private dialog: MatDialog
   ) {
     this.sortedData = this.costs.slice();
-    this.chartOptions = this.getChartOptions();
-    this.columnChartOptions = this.getColumnChartOptions();
+    this.chartOptions = this.getChartOptions('#198754');
+    this.columnChartOptions = this.getColumnChartOptions('#198754');
   }
 
   ngOnInit(): void {
     this.costsService.loadCosts().subscribe((data) => {
       this.costs = data;
       this.sortedData = this.costs.slice();
-      this.chartOptions = this.getChartOptions();
-      this.columnChartOptions = this.getColumnChartOptions();
+      this.chartOptions = this.getChartOptions('#198754');
+      this.columnChartOptions = this.getColumnChartOptions('#198754');
     });
 
     this.authService.isUserLoggedIn().subscribe(
@@ -94,11 +94,12 @@ export class BudgetComponent implements OnInit {
     );
   }
 
-  private getColumnChartOptions() {
+  private getColumnChartOptions(titleColor: string) {
     return {
       animationEnabled: true,
       title: {
-        text: 'Column Chart Title',
+        text: 'Kiadás oszlopdiagram',
+        fontColor: titleColor,
       },
       data: [
         {
@@ -112,11 +113,12 @@ export class BudgetComponent implements OnInit {
     };
   }
 
-  private getChartOptions() {
+  private getChartOptions(titleColor: string) {
     return {
       animationEnabled: true,
       title: {
-        text: 'Kiadás diagram',
+        text: 'Kiadás kördiagram',
+        fontColor: titleColor,
       },
       data: [
         {
@@ -137,8 +139,8 @@ export class BudgetComponent implements OnInit {
     this.costsService.delete(cost.id).then(() => {
       this.costs = this.costs.filter(c => c.id !== cost.id);
       this.sortedData = this.costs.slice();
-      this.chartOptions = this.getChartOptions();
-      this.columnChartOptions = this.getColumnChartOptions();
+      this.chartOptions = this.getChartOptions('#198754');
+      this.columnChartOptions = this.getColumnChartOptions('#198754');
 
     }).catch(error => {
       console.error('Error deleting item: ', error);

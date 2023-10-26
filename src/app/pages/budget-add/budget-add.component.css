@@ -6,7 +6,7 @@
   }
   
   form div {
-    padding: 5px 5px 5px 5px;
+    padding: 15px 5px 5px 5px;
   }
 
   mat-icon {
@@ -21,7 +21,9 @@
   
   /* Style for the "HUF" label */
   .currency-label {
-    margin-top: 4px; /* Adjust the margin as needed */
+    margin-top: 4px;
+    flex: 0 0 auto;
+    margin-left: 2px; /* Adjust the margin as needed */
   }
   
   /* Style for the input field */
@@ -32,7 +34,6 @@
   .line:valid + .currency-label {
     display: inline;
   }
-  
   
   form {
     display: inline-grid;
