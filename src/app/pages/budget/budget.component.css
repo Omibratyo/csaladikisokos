@@ -6,7 +6,7 @@
 .table-container {
     text-align: center;
     margin-top: 15px;
-    max-height: 184px;
+    max-height: 224px;
     overflow: auto;
     max-width: 60%;
     margin-left: 20%;
@@ -61,7 +61,7 @@ tr {
 
 .header-row th:nth-child(2) {
     border-right: 2px solid white;
-    border-left: 2px solid white; 
+    border-left: 2px solid white;
 }
 
 .header-row th:last-child {
@@ -71,14 +71,14 @@ tr {
 
 .chart-container {
     display: flex;
-    justify-content: space-between; /* Adjust as needed */
+    justify-content: space-between;
     flex-wrap: wrap;
     padding-top: 40px;
-  }
-  
-  canvasjs-chart {
-    flex: 1; /* This will make each chart take up 50% of the container width */
-  }
+}
+
+canvasjs-chart {
+    flex: 1;
+}
 
 td:last-child {
     max-width: 7px;
@@ -109,9 +109,9 @@ td {
 
 ::ng-deep .mat-sort-header-arrow {
     color: white;
-  }
+}
 
 ::ng-deep .mat-sort-header-container {
-    display:flex;
-    justify-content:center;
-  }
+    display: flex;
+    justify-content: center;
+}

@@ -1,16 +1,9 @@
-import { ProductsService } from '../../shared/services/products.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Products } from 'src/app/shared/models/Products';
+import { MatDialogRef } from '@angular/material/dialog';
 import { CostsService } from 'src/app/shared/services/costs.service';
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from 'firebase/storage';
 
 interface Category {
   value: string;
@@ -44,7 +37,8 @@ export class BudgetAddComponent implements OnInit {
   constructor(
     private router: Router,
     private costsService: CostsService,
-    private storage: AngularFireStorage ) {}
+    private storage: AngularFireStorage,
+    public dialogRef: MatDialogRef<BudgetAddComponent> ) {}
 
   ngOnInit(): void {
     this.valami = (localStorage.getItem('uid'));
@@ -54,7 +48,8 @@ export class BudgetAddComponent implements OnInit {
   onSubmit(): void{
     if (this.createCostsForm.valid) {
         this.costsService.create(this.createCostsForm.value).then(_ => {
-          this.router.navigateByUrl('/storage');
+          this.dialogRef.close();
+          this.router.navigateByUrl('/budget');
         }).catch(error => {
           console.error(error);
         });

@@ -5,7 +5,7 @@
         <th mat-sort-header="price">Ár</th>
         <th><mat-icon (click)="openBudgetAddDialog()" matTooltip="Kiadás hozzáadása">add_box</mat-icon></th>
       </tr>
-      <tr *ngFor="let cost of sortedData">
+      <tr *ngFor="let cost of sortedTable">
         <td>{{ cost.category }}</td>
         <td>{{ cost.price | currency: 'HUF' :'symbol':'1.0' }}</td>
         <td><mat-icon (click)="delete(cost)" matTooltip="Kiadás törlése">delete</mat-icon></td>

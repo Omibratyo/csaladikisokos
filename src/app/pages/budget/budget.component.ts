@@ -6,7 +6,6 @@ import { Costs } from 'src/app/shared/models/Costs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import * as CanvasJS from 'canvasjs';
 
 @Component({
   selector: 'app-budget',
@@ -18,6 +17,7 @@ export class BudgetComponent implements OnInit {
   costs: Array<Costs> = [];
   loggedInUser?: firebase.default.User | null;
   sortedData: Costs[];
+  sortedTable: Costs[];
   chartOptions: any;
   columnChartOptions: any;
   chart: any;
@@ -28,17 +28,19 @@ export class BudgetComponent implements OnInit {
     private authService: AuthService,
     private dialog: MatDialog
   ) {
-    this.sortedData = this.costs.slice();
-    this.chartOptions = this.getChartOptions('#198754');
-    this.columnChartOptions = this.getColumnChartOptions('#198754');
+    this.sortedTable = this.costs.slice();
+    this.sortedData = this.getUniqueCategories(this.costs);
+    this.chartOptions = this.getChartOptions('#198754', this.sortedData);
+    this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
   }
 
   ngOnInit(): void {
     this.costsService.loadCosts().subscribe((data) => {
       this.costs = data;
-      this.sortedData = this.costs.slice();
-      this.chartOptions = this.getChartOptions('#198754');
-      this.columnChartOptions = this.getColumnChartOptions('#198754');
+      this.sortedTable = this.costs.slice();
+      this.sortedData = this.getUniqueCategories(data);
+      this.chartOptions = this.getChartOptions('#198754', this.sortedData);
+      this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
     });
 
     this.authService.isUserLoggedIn().subscribe(
@@ -53,13 +55,13 @@ export class BudgetComponent implements OnInit {
 
   openBudgetAddDialog() {
     const dialogRef = this.dialog.open(BudgetAddComponent, {
-      width: '500px', // Specify the desired width
-      data: { /* Pass any data you want to the dialog */ }
+      width: '500px',
+      data: { }
     });
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Handle the result from the dialog (if needed)
+        
       }
     });
   }
@@ -67,11 +69,11 @@ export class BudgetComponent implements OnInit {
   sortData(sort: Sort) {
     const data = this.costs.slice();
     if (!sort.active || sort.direction === '') {
-      this.sortedData = data;
+      this.sortedTable = data;
       return;
     }
 
-    this.sortedData = data.sort((a, b) => {
+    this.sortedTable = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'category':
@@ -82,19 +84,28 @@ export class BudgetComponent implements OnInit {
           return 0;
       }
     });
-    this.chartOptions.data[0].dataPoints = this.sortedData.map((cost) => ({
-      y: cost.price,
-      name: cost.category,
-    }));
-    this.columnChartOptions.data[0].dataPoints = this.sortedData.map(
-      (cost) => ({
-        label: cost.category,
-        y: cost.price,
-      })
-    );
   }
 
-  private getColumnChartOptions(titleColor: string) {
+  getUniqueCategories(data: Costs[]): Costs[] {
+    const uniqueCategoriesMap = new Map<string, Costs>();
+  
+    data.forEach((cost) => {
+      if (uniqueCategoriesMap.has(cost.category)) {
+        const existingCost = uniqueCategoriesMap.get(cost.category);
+        if (existingCost) {
+          existingCost.price += cost.price;
+        }
+      } else {
+        uniqueCategoriesMap.set(cost.category, { category: cost.category, price: cost.price, user_id: '', id: '' });
+      }
+    });
+  
+    const uniqueCategories: Costs[] = Array.from(uniqueCategoriesMap.values());
+  
+    return uniqueCategories;
+  }
+  
+  private getColumnChartOptions(titleColor: string, data: Costs[]) {
     return {
       animationEnabled: true,
       title: {
@@ -104,7 +115,8 @@ export class BudgetComponent implements OnInit {
       data: [
         {
           type: 'column',
-          dataPoints: this.sortedData.map((cost) => ({
+          yValueFormatString: "'HUF'#,###.##",
+          dataPoints: data.map((cost) => ({
             label: cost.category,
             y: cost.price,
           })),
@@ -112,8 +124,8 @@ export class BudgetComponent implements OnInit {
       ],
     };
   }
-
-  private getChartOptions(titleColor: string) {
+  
+  private getChartOptions(titleColor: string, data: Costs[]) {
     return {
       animationEnabled: true,
       title: {
@@ -126,7 +138,7 @@ export class BudgetComponent implements OnInit {
           startAngle: -90,
           indexLabel: '{name}: {y}',
           yValueFormatString: "'HUF'#,###.##",
-          dataPoints: this.sortedData.map((cost) => ({
+          dataPoints: data.map((cost) => ({
             y: cost.price,
             name: cost.category,
           })),
@@ -139,8 +151,8 @@ export class BudgetComponent implements OnInit {
     this.costsService.delete(cost.id).then(() => {
       this.costs = this.costs.filter(c => c.id !== cost.id);
       this.sortedData = this.costs.slice();
-      this.chartOptions = this.getChartOptions('#198754');
-      this.columnChartOptions = this.getColumnChartOptions('#198754');
+      this.chartOptions = this.getChartOptions('#198754', this.sortedData);
+      this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
 
     }).catch(error => {
       console.error('Error deleting item: ', error);
