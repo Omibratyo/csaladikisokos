@@ -1,15 +1,12 @@
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { SharingService } from './shared/services/sharing.service';
-import { ProductsService } from './shared/services/products.service';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore} from '@angular/fire/firestore';
 import { provideStorage, getStorage} from '@angular/fire/storage';
-import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
@@ -51,7 +48,7 @@ import { MatSelectModule} from '@angular/material/select';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
-import {Sort, MatSortModule} from '@angular/material/sort';
+import { MatSortModule} from '@angular/material/sort';
 import { BudgetAddComponent } from './pages/budget-add/budget-add.component';
 
 

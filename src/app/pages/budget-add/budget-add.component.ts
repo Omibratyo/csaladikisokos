@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CostsService } from 'src/app/shared/services/costs.service';
+import { getAuth } from '@angular/fire/auth';
 
 interface Category {
   value: string;
@@ -17,8 +18,7 @@ interface Category {
 })
 export class BudgetAddComponent implements OnInit {
 
-  valami: any;
-  uid: string='';
+  userUid: string='';
 
   categories: Category[] = [
     {value: 'Élelmiszer', viewValue: 'Élelmiszer'},
@@ -40,21 +40,31 @@ export class BudgetAddComponent implements OnInit {
     private storage: AngularFireStorage,
     public dialogRef: MatDialogRef<BudgetAddComponent> ) {}
 
-  ngOnInit(): void {
-    this.valami = (localStorage.getItem('uid'));
-  }
-
-
-  onSubmit(): void{
-    if (this.createCostsForm.valid) {
-        this.costsService.create(this.createCostsForm.value).then(_ => {
-          this.dialogRef.close();
-          this.router.navigateByUrl('/budget');
-        }).catch(error => {
-          console.error(error);
-        });
+    ngOnInit(): void {
+      const user = getAuth().currentUser;
+      
+      if (user) {
+        this.userUid = user.uid;
+      } else {
       }
-  }
+      this.createCostsForm.get('user_id')?.setValue(this.userUid);
+    }
+
+    onSubmit(): void {
+      if (this.createCostsForm.valid) {
+        if (this.userUid) {
+          this.createCostsForm.get('user_id')?.setValue(this.userUid);
+    
+          this.costsService.create(this.createCostsForm.value).then(_ => {
+            this.dialogRef.close();
+            this.router.navigateByUrl('/budget');
+          }).catch(error => {
+            console.error(error);
+          });
+        } else {
+        }
+      }
+    }
   
   get price() { return this.createCostsForm.get('price'); }
   get category() { return this.createCostsForm.get('category'); }

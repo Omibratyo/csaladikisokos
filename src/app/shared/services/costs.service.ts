@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Costs } from '../models/Costs';
+import { getAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class CostsService {
 
   collectionName = 'Costs';
   url='';
-  valami: any;
+  userUid: string='';
   
 
   constructor(
@@ -22,8 +23,13 @@ export class CostsService {
   ) { }
 
   loadCosts(){
-    this.valami = (localStorage.getItem('uid'));
-    return this.afs.collection<Costs>(this.collectionName, ref => ref.where('user_id', '==', this.valami)).valueChanges();
+    const user = getAuth().currentUser;
+      
+      if (user) {
+        this.userUid = user.uid;
+      } else {
+      }
+    return this.afs.collection<Costs>(this.collectionName, ref => ref.where('user_id', '==', this.userUid)).valueChanges();
   }
 
   getProductsById(Id: string) {

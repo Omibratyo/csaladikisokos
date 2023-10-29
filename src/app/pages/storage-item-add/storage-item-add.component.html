@@ -47,11 +47,6 @@
                         Elem leírása kötelező!
                     </div>
                 </mat-form-field>
-                <mat-form-field>
-                    <mat-icon matPrefix>bookmark</mat-icon>
-                    <mat-label for="user_id">Felhasználó id-je: </mat-label>
-                    <input matInput type="text" class="line color" formControlName="user_id" [(ngModel)]="valami" readonly>
-                </mat-form-field>
                 <mat-card-actions>
                     <input type="file" formControlName="image_url" (change)="chooseImgToUpload($event)">
                     <button mat-raised-button type="button" (click)="onSubmit()" [disabled]="!createProductsForm.valid" [routerLink]="'/storage'">Elem hozzáadása</button>

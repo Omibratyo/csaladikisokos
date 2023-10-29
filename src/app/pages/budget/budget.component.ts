@@ -23,15 +23,12 @@ export class BudgetComponent implements OnInit {
   chart: any;
 
   constructor(
-    private router: Router,
     private costsService: CostsService,
     private authService: AuthService,
     private dialog: MatDialog
   ) {
     this.sortedTable = this.costs.slice();
     this.sortedData = this.getUniqueCategories(this.costs);
-    this.chartOptions = this.getChartOptions('#198754', this.sortedData);
-    this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
   }
 
   ngOnInit(): void {
@@ -42,7 +39,7 @@ export class BudgetComponent implements OnInit {
       this.chartOptions = this.getChartOptions('#198754', this.sortedData);
       this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
     });
-
+  
     this.authService.isUserLoggedIn().subscribe(
       (user) => {
         this.loggedInUser = user;
@@ -51,6 +48,14 @@ export class BudgetComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+  
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.chartOptions = this.getChartOptions('#198754', this.sortedData);
+      this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
+    });
   }
 
   openBudgetAddDialog() {
@@ -148,15 +153,22 @@ export class BudgetComponent implements OnInit {
   }
 
   delete(cost: Costs) {
-    this.costsService.delete(cost.id).then(() => {
-      this.costs = this.costs.filter(c => c.id !== cost.id);
-      this.sortedData = this.costs.slice();
-      this.chartOptions = this.getChartOptions('#198754', this.sortedData);
-      this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
-
-    }).catch(error => {
-      console.error('Error deleting item: ', error);
-    });
+    this.costsService.delete(cost.id)
+      .then(() => {
+        // After the deletion is successful, update your costs array.
+        this.costs = this.costs.filter(c => c.id !== cost.id);
+        
+        // Recalculate the unique categories based on the updated costs.
+        this.sortedData = this.getUniqueCategories(this.costs);
+    
+        // Update the chart options based on the sorted data.
+        this.chartOptions = this.getChartOptions('#198754', this.sortedData);
+        this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
+        
+      })
+      .catch(error => {
+        console.error('Error deleting item: ', error);
+      });
   }
   
 }

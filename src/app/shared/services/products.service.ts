@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Products } from '../models/Products';
 import { User } from '../models/User';
+import { getAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,7 @@ export class ProductsService {
 
   collectionName = 'Products';
   url='';
-  valami: any;
-  
+  userUid: string='';
 
   constructor(
     private afs: AngularFirestore,
@@ -25,9 +25,13 @@ export class ProductsService {
   ) { }
 
   loadProducts(){
-    this.valami = (localStorage.getItem('uid'));
-    //return this.afs.collection<Products>(this.collectionName).valueChanges();
-    return this.afs.collection<Products>(this.collectionName, ref => ref.where('user_id', '==', this.valami)).valueChanges();
+    const user = getAuth().currentUser;
+      
+      if (user) {
+        this.userUid = user.uid;
+      } else {
+      }
+    return this.afs.collection<Products>(this.collectionName, ref => ref.where('user_id', '==', this.userUid)).valueChanges();
   }
 
   getProductsById(Id: string) {

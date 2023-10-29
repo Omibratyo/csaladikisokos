@@ -11,6 +11,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage';
+import { getAuth } from '@angular/fire/auth';
 
 interface Category {
   value: string;
@@ -28,10 +29,9 @@ interface Unit {
 })
 export class StorageItemAddComponent implements OnInit {
 
-  valami: any;
   imgToUpload: any = {};
 
-  uid: string='';
+  userUid: string='';
   imgUploadUrl: string='';
   releaseUploadUrl: string='';
 
@@ -77,27 +77,47 @@ export class StorageItemAddComponent implements OnInit {
     private storage: AngularFireStorage ) {}
 
   ngOnInit(): void {
-    this.valami = (localStorage.getItem('uid'));
+    //this.valami = (localStorage.getItem('uid'));
+    const user = getAuth().currentUser;
+      
+      if (user) {
+        this.userUid = user.uid;
+      } else {
+      }
+      this.createProductsForm.get('user_id')?.setValue(this.userUid);
   }
+  
 
 
- onSubmit(): void{
-  if (this.createProductsForm.valid) {
-      this.uploadImg().finally(()=>{
-        const dto: Products = {
-          ...this.createProductsForm.getRawValue() ,
-          image_url:this.imgUploadUrl
-        }
-        console.log(dto);
-        this.productsService.create(dto).then(_ => {
-          this.router.navigateByUrl('/storage');
-        }).catch(error => {
-          console.error(error);
+  onSubmit(): void {
+    if (this.createProductsForm.valid) {
+      if (this.userUid) {
+        this.uploadImg().finally(() => {
+          // Create a Products object with userUid
+          const dto: Products = {
+            ...this.createProductsForm.getRawValue(),
+            user_id: this.userUid, // Include the userUid in the Products object
+            image_url: this.imgUploadUrl
+          };
+  
+          // Log the object for debugging
+          console.log(dto);
+  
+          // Create the product with userUid
+          this.productsService.create(dto).then(_ => {
+            this.router.navigateByUrl('/storage');
+          }).catch(error => {
+            console.error(error);
+          });
         });
-      });
+      } else {
+        // Handle the case when there is no authenticated user (userUid is not defined)
+        // You can display an error message, redirect the user, or take other appropriate action.
+      }
     }
     console.log(this.createProductsForm);
   }
+  
   get title() { return this.createProductsForm.get('title'); }
   get quantity() { return this.createProductsForm.get('quantity'); }
   get unit() { return this.createProductsForm.get('unit'); }
@@ -109,7 +129,7 @@ export class StorageItemAddComponent implements OnInit {
     return new Promise((resolve, reject) => {
       const storageRef = ref(
         this.storagenew,
-        'images/' + this.uid + '_' + this.imgToUpload.name
+        'images/' + this.userUid + '_' + this.imgToUpload.name
       );
       const uploadTask = uploadBytesResumable(storageRef, this.imgToUpload);
       uploadTask.on(
