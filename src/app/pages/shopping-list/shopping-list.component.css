@@ -1,0 +1,95 @@
+caption {
+    caption-side: top;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    background-color: #198754;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse the borders to prevent double border lines */
+}
+
+.table-container {
+    border: 2px solid black;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 15px;
+}
+
+.visible {
+    font-weight: bold;
+}
+
+.scroll {
+    max-height: 333px;
+    overflow: auto;
+}
+
+tr {
+    border: 2px solid black;
+}
+
+.halfone {
+    width: 70%;
+}
+
+.halftwo {
+    max-width: 30%;
+}
+
+.pozicio {
+    display: flex;
+}
+
+.teljes {
+    height: auto;
+}   
+
+::ng-deep .mat-tooltip {
+    background-color: #198754;
+    font-size: 14px;
+    padding: 3px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+mat-icon {
+    cursor: pointer;
+}
+
+tr:nth-child(even) {
+    background-color: lightgray; 
+}
+
+.checked-text {
+    text-decoration: line-through;
+    color: gray; 
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+    transform: scale(1.4); 
+    margin-left: 200px;
+    margin-top: 6px;
+}
+
+input[type="checkbox"]:checked {
+    border-color: #198754;
+} 
+
+input:checked {
+    accent-color: #198754;
+    margin-top: 2px;
+    margin-right: 2px;
+}
+
+.tr-bg-even {
+    background-color: lightgray; 
+}
+
+.vertical-align-middle {
+    display: flex;
+    align-items: center;
+}

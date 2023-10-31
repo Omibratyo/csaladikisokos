@@ -50,6 +50,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { MatSortModule} from '@angular/material/sort';
 import { BudgetAddComponent } from './pages/budget-add/budget-add.component';
+import { ShoppingListAddComponent } from './pages/shopping-list-add/shopping-list-add.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { BudgetAddComponent } from './pages/budget-add/budget-add.component';
     CleaningStorageComponent,
     BsSidebarComponent,
     ErrorDialogComponent,
-    BudgetAddComponent
+    BudgetAddComponent,
+    ShoppingListAddComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,9 @@
+import { SharingService } from './../../shared/services/sharing.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Shoppinglist } from 'src/app/shared/models/Shoppinglist';
+import { ShoppingListService } from 'src/app/shared/services/shopping-list.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-shopping-list',
@@ -7,9 +12,136 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShoppingListComponent implements OnInit {
 
-  constructor() { }
+  productId: any; 
+  shoppinglist: Array<Shoppinglist> = [];
+  loggedInUser?: firebase.default.User | null;
+  productObject?: Array<Shoppinglist>;
+  selectedSubcategory: any = null;
+  categories = [
+    {
+      mainCategory: 'Gyümölcs és zöldség',
+      subcategories: ['Áfonya', 'Alma', 'Ananász','Articsóka','Avokádó','Banán','Barack',
+                      'Bazsalikom','Borsó','Brokkoli','Cékla','Citrom','Csereszenye','Édeskrumpli','Eper',
+                      'Fejes káposzta','Fejes saláta','Fokhagyma','Füge','Gomba','Görögdinnye','Grapefruit',
+                      'Gyömbér','Hagyma','Kakukkfű','Karfiol','Kiwi','Koktélparadicsom','Koriander','Körte','Krumpli',
+                      'Kukorica','Málna','Mandarin','Mangó','Menta','Narancs','Nektarin','Őszibarack','Padlizsán','Paprika',
+                      'Paradicsom','Petrezselyem','Póréhagyma','Répa','Retek','Rukkola','Saláta','Sárgadinnye','Spárga'
+                      ,'Spenót','Sütőtök','Szeder','Szilva','Szőlő','Tök','Uborka','Zeller','Zsálya'],
+      isExpanded: false,
+    },
+    {
+      mainCategory: 'Kenyér és sütemény',
+      subcategories: ['Dobostorta','Donut,fánk','Kenyér','Kifli','Kürtöskalács','Lángos','Lepény','Leveles tészta',
+                      'Muffin','Palacsinta','Pirított kenyér','Pizzatészta','Zsemle'],
+      isExpanded: false,
+    },
+    {
+      mainCategory: 'Tej és sajt',
+      subcategories: ['Cheddar sajt','Feta sajt','Joghurt','Margarin','Mascarpone sajt','Mozzarella sajt','Parmezán sajt',
+                      'Reszelt sajt','Szójatej','Tej','Tejföl','Tojás','Túró','Vaj'],
+      isExpanded: false,
+    },
+    {
+      mainCategory: 'Hús és hal',
+      subcategories: ['Bárány','Borjúhús','Csirke','Darlált hús','Felvágottak','Garnélák','Hal','Homár',
+                      'Kagyló','Kolbász','Lazac','Marhahús','Osztriga','Pick szalámi','Pulyka','Sertéshús','Sonka',
+                      'Szalonna','Szardella','Tonhal'],
+      isExpanded: false,
+    },
+    {
+      mainCategory: 'Kellékek és fűszer',
+      subcategories: ['Almapüré','Bab','Balzsamecet','BBQ szósz','Cukor','Dió','Ecet','Élesztő','Fahéj','Fekete bors',
+                      'Juharszirup','Ketchup','Kókusztej','Lencse','Majonéz','Mandula','Mogyoró','Mogyoróvaj','Mustár',
+                      'Olaj','Olivaolaj','Oregánó','Paprika','Paradicsom püré','Paradicsom szósz','Porcukor','Rozmaring',
+                      'Só','Sütőpor','Vaníliás cukor'],
+      isExpanded: false,
+    },
+    {
+      mainCategory: 'Fagyasztott és készétel',
+      subcategories: ['Csirkeszárnyak','Fagyasztott zöldségek','Fagylalt','Lasagne','Leves','Pizza','Sültkrumpli'],
+      isExpanded: false,
+    },{
+      mainCategory: 'Gabonatermékek',
+      subcategories: ['Cornflakes','Csicseriborsó','Kuszkusz','Liszt','Müzli','Rizs','Tarhonya','Zabpehely'],
+      isExpanded: false,
+    },{
+      mainCategory: 'Nasi',
+      subcategories: ['Chips','Csokoládé','Desszert','Földimogyoró','Keksz','Lekvár','Méz','Müzliszelet','Pattogatott kukorica',
+                      'Puding','Rágógumi','Tortilla chips','Zselé'],
+      isExpanded: false,
+    },{
+      mainCategory: 'Ital',
+      subcategories: ['Almalé','Ásványvíz','Energiaital','Fehérbor','Gin','Gyümölcslé','Kakaó','Kávé','Kávékapszula',
+                      'Kóla','Narancslé','Pálinka','Pezsgő','Rum','Sör','Tea','Tonic','Víz','Vodka','Vörösbor','Whisky'],
+      isExpanded: false,
+    },{
+      mainCategory: 'Háztartás',
+      subcategories: ['Alufólia','Elemek','Faszén','Gyertyák','Mosogatógép tabletta','Mosogatószer','Mosószer','Öblítő',
+                      'Papírtörlő','Sütőpapír','Szalvéta','Szemeteszacskó','Szivacs','Tisztító szerek','Villanykörte','WC tisztító'],
+      isExpanded: false,
+    },{
+      mainCategory: 'Szépségápolás és Egézsség',
+      subcategories: ['Ajakápoló','Arckrém','Borotvahab','Borotva','Dezodor','Fogkefe','Fogkrém','Fájdalomcsillapító',
+                      'Fogselyem','Fülpucoló','Hajlakk','Hajzselé','Kézkenőcs','Körömlakk','Napkrém','Pelenka',
+                      'Ragtapasz','Sampon','Szájvíz','Szappan','Testápoló','Tusfürdő','Vitaminok','WC papír','Zsebkendő'],
+      isExpanded: false,
+    },{
+      mainCategory: 'Állat ellátmány',
+      subcategories: ['Haleledel','Kutyaeledel','Macska alom','Macska eledel','Madáreledel'],
+      isExpanded: false,
+    }
+  ];
+
+  checkedItems: Set<number> = new Set<number>();
+
+  constructor(private router: Router,
+    private shoppingListService: ShoppingListService,
+    private SharingService: SharingService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.shoppingListService.loadShoppinglist().subscribe(data => {
+      this.shoppinglist = data;
+    });
+
+    this.authService.isUserLoggedIn().subscribe(
+      user => {
+        this.loggedInUser = user;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  // Create a method to toggle the checked state of an item
+  toggleItem(index: number) {
+    if (this.checkedItems.has(index)) {
+      this.checkedItems.delete(index);
+    } else {
+      this.checkedItems.add(index);
+    }
+  }
+
+  selectSubcategory(category: any) {
+    this.selectedSubcategory = category;
+  }
+
+  // Add the goBack function
+  goBack() {
+    this.selectedSubcategory = null;
+  }
+
+  getProductsId(product: any) {
+    this.productId = product.id;
+    this.SharingService.setData(this.productId);
+
+    this.router.navigateByUrl('/storage-item');
+  }
+
+  async delete(id: string){
+    this.shoppingListService.delete(id);
   }
 
 }
+
