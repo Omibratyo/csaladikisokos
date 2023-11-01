@@ -16,6 +16,7 @@
                     {{showPassword?'visibility_off':'visibility'}}
                 </mat-icon>
             </mat-form-field>
+            <span *ngIf="password?.value.length === 0 && password?.touched" class="text-danger"> Jelszó megadása kötelező!</span>
             <div *ngIf="password?.hasError('minlength')" class="text-danger">
                 Jelszónak legalább <a style="font-weight: bold;">6</a> hosszúságúnak kell lennie!
             </div> 
@@ -27,6 +28,7 @@
                     {{showPassword?'visibility_off':'visibility'}}
                 </mat-icon>
             </mat-form-field>
+            <span *ngIf="rePassword?.value.length === 0 && rePassword?.touched" class="text-danger"> Jelszó megerősítése kötelező!</span>
             <div *ngIf="rePassword?.value != password?.value" class="text-danger">
                 A jelszavaknak nem egyeznek!
             </div> 
@@ -36,13 +38,13 @@
                     <mat-label for="firstname">Keresztnév:</mat-label>
                     <input matInput type="text" formControlName="firstname" required (input)="firstnameTouched = true" (input)="checkNameFields()"/>
                 </mat-form-field>
-                <span class="error text-danger" *ngIf="firstnameTouched && signUpForm.get('name.firstname')?.value.length === 0">A keresztnév megadása kötelező!</span>
+                <span class="error text-danger" *ngIf="firstnameTouched && signUpForm.get('name.firstname')?.hasError('required') || firstname?.invalid && firstname?.touched">A keresztnév megadása kötelező!</span>
                 <mat-form-field>
                     <mat-icon matPrefix>person</mat-icon>
                     <mat-label for="firstname">Vezetéknév: </mat-label>
                     <input matInput type="text" formControlName="lastname" required (input)="lastnameTouched = true" (input)="checkNameFields()"/>
                 </mat-form-field>
-                <span class="error text-danger" *ngIf="lastnameTouched && signUpForm.get('name.lastname')?.value.length === 0">A vezetéknév megadása kötelező!</span>
+                <span class="error text-danger" *ngIf="lastnameTouched && signUpForm.get('name.lastname')?.hasError('required') || lastname?.invalid && lastname?.touched">A vezetéknév megadása kötelező!</span>
             </div>
             <div>
                 <span class="buttons">

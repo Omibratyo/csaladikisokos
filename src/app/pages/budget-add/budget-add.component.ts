@@ -22,8 +22,16 @@ export class BudgetAddComponent implements OnInit {
 
   categories: Category[] = [
     {value: 'Élelmiszer', viewValue: 'Élelmiszer'},
-    {value: 'Fürdőszoba', viewValue: 'Fürdőszoba'},
-    {value: 'Takarítás', viewValue: 'Takarítás'}
+    {value: 'Rezsi', viewValue: 'Rezsi'},
+    {value: 'Autó', viewValue: 'Autó'},
+    {value: 'Gyógyszerek', viewValue: 'Gyógyszerek'},
+    {value: 'Váratlan kiadás', viewValue: 'Váratlan kiadás'},
+    {value: 'Szórakozás', viewValue: 'Szórakozás'},
+    {value: 'Ház- vagy lakásfelújítás', viewValue: 'Ház- vagy lakásfelújítás'},
+    {value: 'Ruházat', viewValue: 'Ruházat'},
+    {value: 'TV- és telefon használat', viewValue: 'TV- és telefon használat'},
+    {value: 'Hitel törlesztés', viewValue: 'Hitel törlesztés'},
+    {value: 'Gyerek', viewValue: 'Gyerek'}
   ];
 
   createCostsForm = new FormGroup({

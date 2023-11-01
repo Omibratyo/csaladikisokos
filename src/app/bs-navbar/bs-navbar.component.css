@@ -1,9 +1,19 @@
 .sticky {
     position: sticky;
-    top: 0px; /* When the element reaches top: 10px, it becomes fixed. */
+    top: 0px; 
     z-index: 1000;
 }
 
 .navbar-dark .navbar-nav .nav-link {
     color: white;
+}
+
+.dropdown-menu.dropdown-menu-right {
+    right: 0;
+    left: auto;
+    margin-right: 5px;
+}
+
+.dropdown-menu.dropdown-menu-right:hover {
+    cursor: pointer;
 }

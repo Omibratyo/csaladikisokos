@@ -85,8 +85,13 @@ export class SignupComponent implements OnInit {
   }
 
   get firstname() {
-    return this.signUpForm.get('firstname');
+    return this.signUpForm.get('name.firstname');
   }
+  
+  get lastname() {
+    return this.signUpForm.get('name.lastname');
+  }
+  
 
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;

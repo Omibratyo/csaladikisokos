@@ -18,15 +18,17 @@
     display: flex;
     align-items: center;
   }
-  
-  /* Style for the "HUF" label */
+
   .currency-label {
     margin-top: 4px;
     flex: 0 0 auto;
-    margin-left: 2px; /* Adjust the margin as needed */
+    margin-left: 2px;
+  }
+
+  .top-gap {
+    margin-top: 50px; 
   }
   
-  /* Style for the input field */
   .line {
     flex: 1;
   }

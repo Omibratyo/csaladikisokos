@@ -6,13 +6,17 @@ caption {
     background-color: #198754;
 }
 
+html, body {
+    overflow: hidden;
+}
+
 body {
     background-image: url(../../shared/images/grocery-list.jpg);
     background-repeat: no-repeat;
-    background-attachment: fixed;  
+    background-attachment: local;
     background-size: cover;
     overflow: hidden;
-    height: 659px;
+    height: 100vh;
 }
 
 table {
@@ -22,7 +26,7 @@ table {
 
 .table-container {
     width: 50%;
-    padding-top: 100px;
+    padding-top: 130px;
     margin-left: 400px;
 }
 
@@ -77,6 +81,7 @@ input[type="checkbox"] {
     transform: scale(1.4);
     margin-top: 6px;
     accent-color: #198754;
+    margin-right: 5px;
 }
 
 input[type="number"] {
@@ -119,7 +124,7 @@ input[type="checkbox"]:checked {
 button {
     text-align: center;
     border: none;
-    color: black;
+    color: white;
     background-color: rgb(233, 28, 28);
     display: inline-block;
     vertical-align: middle;

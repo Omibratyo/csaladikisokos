@@ -114,7 +114,7 @@ export class BudgetComponent implements OnInit {
     return {
       animationEnabled: true,
       title: {
-        text: 'Kiadás oszlopdiagram',
+        text: 'Kiadások(HUF)',
         fontColor: titleColor,
       },
       data: [
@@ -134,7 +134,7 @@ export class BudgetComponent implements OnInit {
     return {
       animationEnabled: true,
       title: {
-        text: 'Kiadás kördiagram',
+        text: 'Kiadások(HUF)',
         fontColor: titleColor,
       },
       data: [
@@ -155,13 +155,10 @@ export class BudgetComponent implements OnInit {
   delete(cost: Costs) {
     this.costsService.delete(cost.id)
       .then(() => {
-        // After the deletion is successful, update your costs array.
         this.costs = this.costs.filter(c => c.id !== cost.id);
         
-        // Recalculate the unique categories based on the updated costs.
         this.sortedData = this.getUniqueCategories(this.costs);
     
-        // Update the chart options based on the sorted data.
         this.chartOptions = this.getChartOptions('#198754', this.sortedData);
         this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
         

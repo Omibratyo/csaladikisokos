@@ -82,13 +82,13 @@ export class ShoppingListComponent implements OnInit {
                       'Papírtörlő','Sütőpapír','Szalvéta','Szemeteszacskó','Szivacs','Tisztító szerek','Villanykörte','WC tisztító'],
       isExpanded: false,
     },{
-      mainCategory: 'Szépségápolás és Egézsség',
+      mainCategory: 'Szépségápolás és Egészség',
       subcategories: ['Ajakápoló','Arckrém','Borotvahab','Borotva','Dezodor','Fogkefe','Fogkrém','Fájdalomcsillapító',
                       'Fogselyem','Fülpucoló','Hajlakk','Hajzselé','Kézkenőcs','Körömlakk','Napkrém','Pelenka',
                       'Ragtapasz','Sampon','Szájvíz','Szappan','Testápoló','Tusfürdő','Vitaminok','WC papír','Zsebkendő'],
       isExpanded: false,
     },{
-      mainCategory: 'Állat ellátmány',
+      mainCategory: 'Állatellátmány',
       subcategories: ['Haleledel','Kutyaeledel','Macska alom','Macska eledel','Madáreledel'],
       isExpanded: false,
     }
