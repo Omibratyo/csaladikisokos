@@ -121,26 +121,43 @@ export class ShoppingListComponent implements OnInit {
           console.error(error);
         }
       );
-    }
-
-  addToShoppingList(subcategory: string) {
-    const quantity = this.quantities[subcategory] || 0;
-
-    if (quantity > 0 && this.loggedInUser?.uid) {
-      const newItem: Shoppinglist = {
-        user_id: this.loggedInUser.uid,
-        id: '',
-        name: subcategory,
-        quantity: quantity,
-        checked: false,
-      };
-
-      this.shoppingListService.create(newItem).then(() => {
+    
+      this.categories.forEach(category => {
+        category.subcategories.forEach(subcategory => {
+          this.quantities[subcategory] = 0;
+        });
       });
-
-      this.quantities[subcategory] = 0;
     }
-  }
+    
+    
+
+    addToShoppingList(subcategory: string) {
+      const quantity = this.quantities[subcategory] || 0;
+    
+      if (quantity > 0 && this.loggedInUser?.uid) {
+        const existingItem = this.shoppinglist.find(item => item.name === subcategory);
+    
+        if (existingItem) {
+          existingItem.quantity += quantity;
+          this.shoppingListService.update(existingItem).then(() => {
+            this.quantities[subcategory] = 0;
+          });
+        } else {
+          const newItem: Shoppinglist = {
+            user_id: this.loggedInUser.uid,
+            id: '',
+            name: subcategory,
+            quantity: quantity,
+            checked: false,
+          };
+    
+          this.shoppingListService.create(newItem).then(() => {
+            this.quantities[subcategory] = 0;
+          });
+        }
+      }
+    }
+    
   
   
 
@@ -161,6 +178,23 @@ export class ShoppingListComponent implements OnInit {
 
   goBack() {
     this.selectedSubcategory = null;
+  }
+
+  deleteCheckedItems() {
+    const itemsToDelete: string[] = [];
+    this.checkedItems.forEach((index) => {
+      itemsToDelete.push(this.shoppinglist[index].id);
+    });
+  
+    itemsToDelete.forEach((id) => {
+      this.shoppingListService.delete(id).then(() => {
+        // Delete successful, update the shoppinglist
+        this.shoppinglist = this.shoppinglist.filter((item) => !itemsToDelete.includes(item.id));
+      });
+    });
+  
+    // Clear the set of checked items
+    this.checkedItems.clear();
   }
 
   getProductsId(product: any) {

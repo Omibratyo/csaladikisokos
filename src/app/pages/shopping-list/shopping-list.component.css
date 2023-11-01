@@ -74,10 +74,9 @@ tr:nth-child(even) {
 }
 
 input[type="checkbox"] {
-    margin-right: 5px;
-    transform: scale(1.4); 
-    margin-left: 200px;
+    transform: scale(1.4);
     margin-top: 6px;
+    accent-color: #198754;
 }
 
 input[type="number"] {
@@ -87,13 +86,9 @@ input[type="number"] {
 
 input[type="checkbox"]:checked {
     border-color: #198754;
-    margin-left: 178px;
-} 
-
-input:checked {
-    accent-color: #198754;
-    margin-top: 2px;
-    margin-right: 2px;
+    display: flex; 
+    justify-content: flex-end;
+    margin-bottom: 3px;
 }
 
 .tr-bg-even {
@@ -119,4 +114,19 @@ input:checked {
 .icon-container {
     display: flex; 
     justify-content: flex-end;
+}
+
+button {
+    text-align: center;
+    border: none;
+    color: black;
+    background-color: rgb(233, 28, 28);
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 5px;
+    margin-left: 75px;
+}
+
+.noborder {
+    border: none;
 }
