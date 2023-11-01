@@ -1,49 +1,63 @@
-<div class="table-container">
-    <table>
-        <caption>Bevásárlólista</caption>
-        <tr>
-            <td class="halfone">
-            <div class="scroll">
-                <table>
-                    <ng-container *ngIf="!selectedSubcategory; else subcategoryView">
-                        <tr *ngFor="let category of categories">
-                            <td class="pozicio">
-                                {{ category.mainCategory }}
-                                <mat-icon (click)="selectSubcategory(category)">
-                                    keyboard_arrow_right
-                                </mat-icon>
-                            </td>
-                        </tr>
-                    </ng-container>
-                    <ng-template #subcategoryView>
-                        <tr>
-                            <td class="pozicio">
-                                <mat-icon (click)="goBack()">
-                                    keyboard_arrow_left
-                                </mat-icon>
-                                <span class="visible" (click)="goBack()">Vissza</span>
-                            </td>
-                        </tr>
-                        <tr *ngFor="let subcategory of selectedSubcategory.subcategories">
+<body>   
+    <div class="table-container">
+        <table>
+            <caption>Bevásárlólista</caption>
+            <tr>
+                <td class="halfone">
+                <div class="scroll">
+                    <table>
+                        <ng-container *ngIf="!selectedSubcategory; else subcategoryView">
+                            <tr *ngFor="let category of categories">
+                                <td class="pozicio">
+                                    {{ category.mainCategory }}
+                                    <mat-icon (click)="selectSubcategory(category)">
+                                        keyboard_arrow_right
+                                    </mat-icon>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #subcategoryView>
+                            <tr>
+                                <td class="pozicio">
+                                    <mat-icon (click)="goBack()">
+                                        keyboard_arrow_left
+                                    </mat-icon>
+                                    <span class="visible" (click)="goBack()">Vissza</span>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let subcategory of selectedSubcategory.subcategories; let i = index">
                             <td>{{ subcategory }}</td>
-                        </tr>
-                    </ng-template>
-                </table>
-            </div>
-            </td>
-            <td class="halftwo">
-                <table class="teljes">
-                    <tr *ngFor="let item of shoppinglist; let i = index" [class.checked]="checkedItems.has(i)">
-                        <td>
-                            <span [class.checked-text]="checkedItems.has(i)">{{ item.name }}({{ item.quantity }})</span>
-                        </td>
-                        <td class="vertical-align-middle">
-                            <input type="checkbox" (change)="toggleItem(i)" [checked]="checkedItems.has(i)">
-                            <mat-icon (click)="delete(item.id)" matTooltip="Elem törlése" *ngIf="checkedItems.has(i)" class="kuka">delete</mat-icon>
-                        </td>
-                    </tr>                    
-                </table>
-            </td>
-        </tr>
-    </table>
-</div>
+                            <td class="icon-container">
+                                <input class="szamok" [(ngModel)]="quantities[subcategory]" type="number" min="0">
+                                <mat-icon
+                                class="valtoztatasikon"
+                                matTooltip="Elem hozzáadása"
+                                (click)="addToShoppingList(subcategory)"
+                                >
+                                add_circle
+                                </mat-icon>
+                            </td>
+                            </tr>
+                        </ng-template>     
+                    </table>
+                </div>
+                </td>
+                <td class="halftwo">
+                    <div class="scroll">
+                    <table class="teljes">
+                        <tr *ngFor="let item of shoppinglist; let i = index" [class.checked]="checkedItems.has(i)">
+                            <td>
+                                <span [class.checked-text]="checkedItems.has(i)">{{ item.name }}({{ item.quantity }})</span>
+                            </td>
+                            <td class="vertical-align-middle">
+                                <input type="checkbox" (change)="toggleItem(i)" [checked]="item.checked">
+                                <mat-icon (click)="delete(item.id)" matTooltip="Elem törlése" *ngIf="checkedItems.has(i)">delete</mat-icon>
+                            </td>
+                        </tr>                    
+                    </table>
+                </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>

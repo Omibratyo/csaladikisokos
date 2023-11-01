@@ -17,10 +17,12 @@ export class ShoppingListComponent implements OnInit {
   loggedInUser?: firebase.default.User | null;
   productObject?: Array<Shoppinglist>;
   selectedSubcategory: any = null;
+  quantities: { [subcategory: string]: number } = {};
+  quantityInput: number = 0;
   categories = [
     {
       mainCategory: 'Gyümölcs és zöldség',
-      subcategories: ['Áfonya', 'Alma', 'Ananász','Articsóka','Avokádó','Banán','Barack',
+      subcategories: [ 'Áfonya', 'Alma', 'Ananász','Articsóka','Avokádó','Banán','Barack',
                       'Bazsalikom','Borsó','Brokkoli','Cékla','Citrom','Csereszenye','Édeskrumpli','Eper',
                       'Fejes káposzta','Fejes saláta','Fokhagyma','Füge','Gomba','Görögdinnye','Grapefruit',
                       'Gyömbér','Hagyma','Kakukkfű','Karfiol','Kiwi','Koktélparadicsom','Koriander','Körte','Krumpli',
@@ -97,37 +99,66 @@ export class ShoppingListComponent implements OnInit {
   constructor(private router: Router,
     private shoppingListService: ShoppingListService,
     private SharingService: SharingService,
-    private authService: AuthService) { }
+    private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.shoppingListService.loadShoppinglist().subscribe(data => {
-      this.shoppinglist = data;
-    });
+    ngOnInit(): void {
+      this.shoppingListService.loadShoppinglist().subscribe(data => {
+        this.shoppinglist = data;
+        this.shoppinglist.forEach((item, index) => {
+          if (item.checked) {
+            this.checkedItems.add(index);
+          } else {
+            this.checkedItems.delete(index);
+          }
+        });
+      });
+    
+      this.authService.isUserLoggedIn().subscribe(
+        user => {
+          this.loggedInUser = user;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
 
-    this.authService.isUserLoggedIn().subscribe(
-      user => {
-        this.loggedInUser = user;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  addToShoppingList(subcategory: string) {
+    const quantity = this.quantities[subcategory] || 0;
+
+    if (quantity > 0 && this.loggedInUser?.uid) {
+      const newItem: Shoppinglist = {
+        user_id: this.loggedInUser.uid,
+        id: '',
+        name: subcategory,
+        quantity: quantity,
+        checked: false,
+      };
+
+      this.shoppingListService.create(newItem).then(() => {
+      });
+
+      this.quantities[subcategory] = 0;
+    }
   }
+  
+  
 
-  // Create a method to toggle the checked state of an item
   toggleItem(index: number) {
     if (this.checkedItems.has(index)) {
       this.checkedItems.delete(index);
+      this.shoppinglist[index].checked = false;
     } else {
       this.checkedItems.add(index);
+      this.shoppinglist[index].checked = true;
     }
   }
+  
 
   selectSubcategory(category: any) {
     this.selectedSubcategory = category;
   }
 
-  // Add the goBack function
   goBack() {
     this.selectedSubcategory = null;
   }

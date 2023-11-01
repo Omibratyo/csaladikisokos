@@ -6,16 +6,24 @@ caption {
     background-color: #198754;
 }
 
+body {
+    background-image: url(../../shared/images/grocery-list.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;
+    overflow: hidden;
+    height: 659px;
+}
+
 table {
     width: 100%;
-    border-collapse: collapse; /* Collapse the borders to prevent double border lines */
+    border-collapse: collapse;
 }
 
 .table-container {
-    border: 2px solid black;
     width: 50%;
-    margin-left: 25%;
-    margin-top: 15px;
+    padding-top: 100px;
+    margin-left: 400px;
 }
 
 .visible {
@@ -32,20 +40,17 @@ tr {
 }
 
 .halfone {
-    width: 70%;
+    max-width: 50%;
 }
 
 .halftwo {
-    max-width: 30%;
+    width: 50%;
 }
 
 .pozicio {
     display: flex;
 }
 
-.teljes {
-    height: auto;
-}   
 
 ::ng-deep .mat-tooltip {
     background-color: #198754;
@@ -75,8 +80,14 @@ input[type="checkbox"] {
     margin-top: 6px;
 }
 
+input[type="number"] {
+    transform: scale(1); 
+    margin-left: 70px;
+}
+
 input[type="checkbox"]:checked {
     border-color: #198754;
+    margin-left: 178px;
 } 
 
 input:checked {
@@ -92,4 +103,20 @@ input:checked {
 .vertical-align-middle {
     display: flex;
     align-items: center;
+}
+
+.valtoztatasikon {
+    margin-bottom: 3px;
+    vertical-align: middle;
+    color: #198754;
+    margin-top: 2px;
+}
+
+.szamok {
+    width: 60px;
+}
+
+.icon-container {
+    display: flex; 
+    justify-content: flex-end;
 }
