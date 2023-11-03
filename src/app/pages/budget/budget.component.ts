@@ -6,6 +6,8 @@ import { Costs } from 'src/app/shared/models/Costs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
+import { FormControl } from '@angular/forms';
+import { MatDatepicker } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-budget',
@@ -21,6 +23,8 @@ export class BudgetComponent implements OnInit {
   chartOptions: any;
   columnChartOptions: any;
   chart: any;
+  filterDate = new FormControl(new Date());
+  loading: boolean = true;
 
   constructor(
     private costsService: CostsService,
@@ -38,6 +42,7 @@ export class BudgetComponent implements OnInit {
       this.sortedData = this.getUniqueCategories(data);
       this.chartOptions = this.getChartOptions('#198754', this.sortedData);
       this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
+      this.loading = false;
     });
   
     this.authService.isUserLoggedIn().subscribe(
@@ -48,6 +53,8 @@ export class BudgetComponent implements OnInit {
         console.error(error);
       }
     );
+
+    this.filterByDate();
   }
   
 
@@ -101,14 +108,20 @@ export class BudgetComponent implements OnInit {
           existingCost.price += cost.price;
         }
       } else {
-        uniqueCategoriesMap.set(cost.category, { category: cost.category, price: cost.price, user_id: '', id: '' });
+        uniqueCategoriesMap.set(cost.category, {
+          category: cost.category,
+          price: cost.price,
+          user_id: '',
+          id: '',
+          date: cost.date
+        });
       }
     });
   
     const uniqueCategories: Costs[] = Array.from(uniqueCategoriesMap.values());
   
     return uniqueCategories;
-  }
+}
   
   private getColumnChartOptions(titleColor: string, data: Costs[]) {
     return {
@@ -166,6 +179,29 @@ export class BudgetComponent implements OnInit {
       .catch(error => {
         console.error('Error deleting item: ', error);
       });
+  }
+
+  filterByDate() {
+    const selectedDate: Date = this.filterDate.value;
+    const selectedYear = selectedDate.getFullYear();
+    const selectedMonth = selectedDate.getMonth();
+
+    const filteredData: Costs[] = this.costs.filter((cost) => {
+      const costDate: Date = cost.date.toDate(); // Convert Firestore Timestamp to JavaScript Date
+      const costYear = costDate.getFullYear();
+      const costMonth = costDate.getMonth();
+      return costYear === selectedYear && costMonth === selectedMonth;
+    });
+
+    this.sortedTable = filteredData;
+    this.sortedData = this.getUniqueCategories(filteredData);
+    this.chartOptions = this.getChartOptions('#198754', this.sortedData);
+    this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
+  }
+  
+  resetFilter() {
+    this.filterDate.setValue(new Date());
+    this.ngOnInit();
   }
   
 }

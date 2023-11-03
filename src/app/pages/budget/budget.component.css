@@ -115,3 +115,38 @@ td {
     display: flex;
     justify-content: center;
 }
+
+th:last-child {
+    background-color: none;
+}
+
+.table-and-form-container {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .table-container {
+    flex: 1; 
+    margin-right: 10px;
+  }
+  
+  .form-container {
+    max-width: 300px;
+  }
+
+mat-form-field {
+    margin-left: 140px;
+    width: 120px;
+}
+
+button {
+    margin-left: 166px;
+    background-color: #198754;
+    color: white;
+}
+
+button:last-child {
+    margin-top: 10px;
+    margin-left: 157px;
+}
+  

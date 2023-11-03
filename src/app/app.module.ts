@@ -51,7 +51,8 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { MatSortModule} from '@angular/material/sort';
 import { BudgetAddComponent } from './pages/budget-add/budget-add.component';
 import { ShoppingListAddComponent } from './pages/shopping-list-add/shopping-list-add.component';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,9 @@ import { ShoppingListAddComponent } from './pages/shopping-list-add/shopping-lis
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     CanvasJSAngularChartsModule,
     MatSortModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     AuthService, 
