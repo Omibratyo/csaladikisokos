@@ -4,7 +4,7 @@
             <form [formGroup]="createProductsForm" novalidate class="example-container">
                 <mat-form-field>
                     <mat-icon matPrefix>bookmark</mat-icon>
-                    <mat-label  for="title">Elem neve: </mat-label>
+                    <mat-label for="title">Elem neve: </mat-label>
                     <input matInput type="text" maxlength="15"  class="line" formControlName="title" required>
                     <div class="middle" *ngIf="title?.errors?.['required'] && title?.touched">
                         Név megadása kötelező!
@@ -42,7 +42,7 @@
                 <mat-form-field>
                     <mat-icon matPrefix>assignment</mat-icon>
                     <mat-label for="description">Elem leírása: </mat-label>
-                    <textarea matInput class="line" type="text" formControlName="description" required></textarea>
+                    <textarea matInput type="text" formControlName="description" required></textarea>
                     <div class="middle" *ngIf="description?.errors?.['required'] && description?.touched">
                         Elem leírása kötelező!
                     </div>

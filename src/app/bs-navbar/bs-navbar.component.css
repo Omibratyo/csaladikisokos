@@ -17,3 +17,7 @@
 .dropdown-menu.dropdown-menu-right:hover {
     cursor: pointer;
 }
+
+.navbar-brand{
+    margin-left: 5px;
+}

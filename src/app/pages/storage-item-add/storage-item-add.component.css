@@ -86,3 +86,11 @@ button {
 .color {
   color: gray;
 }
+
+textarea.mat-input-element {
+  margin-bottom: -13px;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding-bottom: 0px;
+}

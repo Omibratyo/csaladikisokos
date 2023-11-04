@@ -63,3 +63,11 @@ p {
   text-align: center;
   color: red;
 }
+
+textarea.mat-input-element {
+  margin-bottom: -13px;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding-bottom: 0px;
+}

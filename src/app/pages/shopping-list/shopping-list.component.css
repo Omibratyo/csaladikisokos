@@ -12,11 +12,14 @@ html, body {
 
 body {
     background-image: url(../../shared/images/grocery-list.jpg);
+    background-size: 100% 100%;
+    margin: 0;
+    padding: 0;
+    background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: local;
-    background-size: cover;
+    width: 100vw;
+    height: 95vh;
     overflow: hidden;
-    height: 100vh;
 }
 
 table {
