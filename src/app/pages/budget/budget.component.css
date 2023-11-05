@@ -123,30 +123,78 @@ th:last-child {
 .table-and-form-container {
     display: flex;
     align-items: flex-start;
-  }
-  
-  .table-container {
-    flex: 1; 
+}
+
+.table-container {
+    flex: 1;
     margin-right: 10px;
-  }
-  
-  .form-container {
+}
+
+.form-container {
     max-width: 300px;
-  }
+}
 
 mat-form-field {
     margin-left: 140px;
     width: 120px;
 }
 
-button {
+.filterbutton {
     margin-left: 166px;
     background-color: #198754;
     color: white;
 }
 
-button:last-child {
+.resetbutton {
     margin-top: 10px;
     margin-left: 157px;
+    background-color: #198754;
+    color: white;
 }
-  
+
+.centered-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.image-container {
+    position: relative;
+    text-align: center;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.no-costs-message {
+    font-size: 22px;
+    margin-bottom: 20px;
+    margin-top: 35px;
+    font-weight: bold;
+}
+
+.emptybutton {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    background-color: #198754;
+    color: white;
+    border: none;
+}

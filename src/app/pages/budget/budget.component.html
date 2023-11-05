@@ -1,4 +1,4 @@
-<div class="table-and-form-container">
+<div class="table-and-form-container" *ngIf="!loading && costs.length > 0">
   <div class="table-container">
     <table matSort (matSortChange)="sortData($event)">
       <tr class="header-row">
@@ -13,18 +13,31 @@
       </tr>
     </table>
   </div>
-  <div class="form-container">
+  <div class="form-container" *ngIf="!loading && costs.length > 0">
     <mat-form-field>
       <input matInput [matDatepicker]="picker" [formControl]="filterDate">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <button mat-raised-button (click)="filterByDate()">Szűrés</button>
-    <button mat-raised-button (click)="resetFilter()">Visszaállít</button>
+    <button class="filterbutton" mat-raised-button (click)="filterByDate()">Szűrés</button>
+    <button class="resetbutton" mat-raised-button (click)="resetFilter()">Visszaállít</button>
   </div>
 </div>
 
-<div class="chart-container" *ngIf="!loading">
-<canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
-<canvasjs-chart [options]="columnChartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+<div class="chart-container" *ngIf="!loading && costs.length > 0">
+  <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+  <canvasjs-chart [options]="columnChartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
 </div>
+
+<div class="centered-content" *ngIf="costs.length === 0">
+  <div class="image-container">
+    <img src="../../../assets/emptypage.jpg" alt="Empty Page Image">
+    <div class="overlay">
+      <div class="no-costs-message">
+        Még nincs hozzáadott kiadásod!
+      </div>
+      <button class="emptybutton" (click)="openBudgetAddDialog()">Kiadás hozzáadása</button>
+    </div>
+  </div>
+</div>
+

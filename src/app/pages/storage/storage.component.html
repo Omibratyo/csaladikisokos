@@ -1,5 +1,5 @@
 <section class="section-products">
-        <div class="container">
+        <div class="container" *ngIf="!loading && products.length > 0">
                 <div class="ul_checkbox">
                         <ul>
                                 <input class="search" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Keresés">    
@@ -11,7 +11,7 @@
                         </ul>
                 </div>
         </div>
-        <button routerLink="/storage-item-add">Elem hozzáadása</button>
+        <button *ngIf="!loading && products.length > 0" routerLink="/storage-item-add">Elem hozzáadása</button>
 <div id="wrapper">
     <div id="page-content-wrapper">
         <div class="container-fluid">
@@ -33,5 +33,16 @@
         </div>
         </div>
     </div>
+</div>
+<div class="centered-content" *ngIf="products.length === 0">
+        <div class="image-container">
+          <img src="../../../assets/emptypage.jpg" alt="Empty Page Image">
+          <div class="overlay">
+            <div class="no-costs-message">
+              Még nincs hozzáadott elemed!
+            </div>
+            <button class="emptybutton" routerLink="/storage-item-add">Elem hozzáadása</button>
+          </div>
+        </div>
 </div>
 </section>

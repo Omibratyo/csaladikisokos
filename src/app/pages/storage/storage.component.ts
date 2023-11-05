@@ -23,6 +23,7 @@ export class StorageComponent implements OnInit {
   loggedInUser?: firebase.default.User | null;
   productObject?: Array<Products>;
   searchText: any;
+  loading: boolean = true;
 
   constructor(private router: Router,
     private productsService: ProductsService,
@@ -38,6 +39,7 @@ export class StorageComponent implements OnInit {
       console.log(this.products);
 
       this.loadProductImages();
+      this.loading = false;
     });
     
     this.authService.isUserLoggedIn().subscribe(
