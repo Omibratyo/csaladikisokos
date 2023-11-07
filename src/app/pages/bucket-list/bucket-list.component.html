@@ -4,24 +4,22 @@
         <div class="col col-xl-10">
           <div class="card">
             <div class="card-body p-5">
-              <h6 class="mb-3">Bakancslista</h6>
+              <h5 class="mb-3">Bakancslista</h5>
               <form class="d-flex justify-content-center align-items-center mb-4">
-                <div class="form-outline flex-fill">
-                  <input type="text" id="form3" class="form-control form-control-lg" />
+                <div class="form-outline flex-fill" [formGroup]="createBucketlistForm">
+                  <input formControlName="name" type="text" id="form3" class="form-control form-control-lg" />
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg ms-2">Hozzáadás</button>
+                <button (click)="onSubmit()" type="button" class="btn btn-lg ms-2">Hozzáadás</button>
               </form>
-              <ul class="list-group mb-0" *ngFor="let listelement of bucketlist">
+              <ul class="list-group mb-0" *ngFor="let listelement of bucketlist; let i = index" [class.checked]="checkedItems.has(i)">
                 <li class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
                   <div class="d-flex align-items-center">
-                    <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                    {{ listelement.name }}
+                    <input class="me-2" type="checkbox" (change)="toggleCheckbox(i)" />
+                    <span [ngClass]="{'crossed-out-text': shouldCrossOut(i)}">{{ listelement.name }}</span>
                   </div>
-                  <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
-                    <i class="fas fa-times text-primary"></i>
-                  </a>
+                  <mat-icon (click)="delete(listelement.id, i)" matTooltip="Elem törlése" *ngIf="checkedItems.has(i)">delete</mat-icon>
                 </li>
-              </ul>
+              </ul>              
             </div>
           </div>
         </div>

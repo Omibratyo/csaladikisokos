@@ -77,7 +77,6 @@ export class StorageItemAddComponent implements OnInit {
     private storage: AngularFireStorage ) {}
 
   ngOnInit(): void {
-    //this.valami = (localStorage.getItem('uid'));
     const user = getAuth().currentUser;
       
       if (user) {
@@ -93,17 +92,14 @@ export class StorageItemAddComponent implements OnInit {
     if (this.createProductsForm.valid) {
       if (this.userUid) {
         this.uploadImg().finally(() => {
-          // Create a Products object with userUid
           const dto: Products = {
             ...this.createProductsForm.getRawValue(),
-            user_id: this.userUid, // Include the userUid in the Products object
+            user_id: this.userUid,
             image_url: this.imgUploadUrl
           };
   
-          // Log the object for debugging
           console.log(dto);
   
-          // Create the product with userUid
           this.productsService.create(dto).then(_ => {
             this.router.navigateByUrl('/storage');
           }).catch(error => {
@@ -111,8 +107,6 @@ export class StorageItemAddComponent implements OnInit {
           });
         });
       } else {
-        // Handle the case when there is no authenticated user (userUid is not defined)
-        // You can display an error message, redirect the user, or take other appropriate action.
       }
     }
     console.log(this.createProductsForm);
