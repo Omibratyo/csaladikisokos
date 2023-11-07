@@ -27,7 +27,7 @@ export class ShoppingListService {
     return this.afs.collection<Shoppinglist>(this.collectionName, ref => ref.where('user_id', '==', this.userUid)).valueChanges();
   }
 
-  getProductsById(Id: string) {
+  getShoppingListById(Id: string) {
     return this.afs.collection<Shoppinglist>(this.collectionName, ref => ref.where('id', '==', Id).orderBy('quantity', 'desc')).valueChanges();
   }
 
