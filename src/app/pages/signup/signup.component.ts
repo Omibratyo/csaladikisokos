@@ -66,6 +66,8 @@ export class SignupComponent implements OnInit {
       await cred.user?.sendEmailVerification();
   
       await this.userService.create(user);
+
+      this.authService.logout();
   
       this.openEmailVerificationDialog();
     } catch (error) {
