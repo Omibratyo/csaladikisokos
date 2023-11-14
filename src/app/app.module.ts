@@ -53,6 +53,7 @@ import { BudgetAddComponent } from './pages/budget-add/budget-add.component';
 import { ShoppingListAddComponent } from './pages/shopping-list-add/shopping-list-add.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     BsSidebarComponent,
     ErrorDialogComponent,
     BudgetAddComponent,
-    ShoppingListAddComponent
+    ShoppingListAddComponent,
+    EmailVerificationComponent
   ],
   imports: [
     BrowserModule,

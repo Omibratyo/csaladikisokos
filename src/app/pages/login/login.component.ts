@@ -38,18 +38,25 @@ export class LoginComponent implements OnInit {
 
   async loginnew() {
     this.loading = true;
-    this.authService.loginnew(this.email.value, this.password.value)
-      .then(cred => {
+    
+    try {
+      const cred = await this.authService.loginnew(this.email.value, this.password.value);
+  
+      if (await this.authService.isEmailVerified()) {
         console.log(cred);
         this.router.navigateByUrl('');
-        this.loading = false;
-      })
-      .catch(error => {
-        console.error(error);
-        this.loading = false;
-        this.openErrorDialog('Hibás felhasználónév vagy jelszó!');
-      });
+      } else {
+        this.openErrorDialog('Az e-mail-cím még nincsen megerősítve, a belépéshez először erősítsd meg az e-mail-címed.');
+      }
+  
+      this.loading = false;
+    } catch (error) {
+      console.error(error);
+      this.loading = false;
+      this.openErrorDialog('Hibás felhasználónév vagy jelszó!');
+    }
   }
+  
 
   openErrorDialog(message: string): void {
     this.dialog.open(ErrorDialogComponent, {
