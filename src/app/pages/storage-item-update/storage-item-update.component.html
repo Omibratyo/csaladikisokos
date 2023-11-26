@@ -25,23 +25,15 @@
       <mat-form-field>
         <mat-icon matPrefix>category</mat-icon>
         <mat-label for="category">Kategória: </mat-label>
-        <input matInput formControlName="category" [(ngModel)]="product.category">
+        <mat-select class="line" formControlName="category" name="category" required [(ngModel)]="product.category">
+          <mat-option *ngFor="let category of categories" [value]="category.value">
+          {{category.viewValue}}
+          </mat-option>
+        </mat-select>
         <div class="middle" *ngIf="category?.errors?.['required'] && category?.touched">
           Kategória megadása kötelező!
         </div>
       </mat-form-field>
-
-       <!--<mat-form-field>
-            <mat-label for="category">Kategória: </mat-label>
-            <mat-select formControlName="category" name="category">
-                <mat-option *ngFor="let category of categories"  
-                            ngDefaultControl [(ngModel)]="product.category" 
-                            [ngModelOptions]="{standalone: true}" 
-                            [value]="category.value">
-                {{category.viewValue}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>-->
 
       <mat-form-field>
         <mat-icon matPrefix>assignment</mat-icon>

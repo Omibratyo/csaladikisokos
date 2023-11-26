@@ -11,20 +11,19 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'bs-navbar',
   templateUrl: './bs-navbar.component.html',
-  styleUrls: ['./bs-navbar.component.css']
+  styleUrls: ['./bs-navbar.component.css'],
 })
 export class BsNavbarComponent implements OnInit {
-
-  userId: any; 
+  userId: any;
   loggedInUser?: User[] = [];
   userUid?: string;
   isEmailVerified: boolean = false; // Add this variable
   isLoggedInAndEmailVerified: boolean = false; // Add this variable
 
   constructor(
-    private afAuth: AngularFireAuth, 
-    public authService: AuthService, 
-    public userService: UserService, 
+    private afAuth: AngularFireAuth,
+    public authService: AuthService,
+    public userService: UserService,
     private router: Router,
     private sharingService: SharingService,
     private location: Location
@@ -33,31 +32,34 @@ export class BsNavbarComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.sharingService.getData();
 
-    this.authService.isUserLoggedInAndEmailVerified().subscribe(isVerified => {
-      this.isEmailVerified = isVerified;
+    this.authService
+      .isUserLoggedInAndEmailVerified()
+      .subscribe((isVerified) => {
+        this.isEmailVerified = isVerified;
 
-      if (this.isEmailVerified) {
-        this.isLoggedInAndEmailVerified = true;
-        this.authService.CurrentUser()
-          .pipe(
-            filter(data => !!data && !!data.uid),
-            switchMap(data => {
-              this.userUid = data!.uid;
-              return this.authService.getUserById(this.userUid);
-            })
-          )
-          .subscribe(user => {
-            this.loggedInUser = user;
-          });
-      } else {
-        this.isLoggedInAndEmailVerified = false;
-        this.loggedInUser = [];
-        this.userUid = undefined;
-      }
-    });
+        if (this.isEmailVerified) {
+          this.isLoggedInAndEmailVerified = true;
+          this.authService
+            .CurrentUser()
+            .pipe(
+              filter((data) => !!data && !!data.uid),
+              switchMap((data) => {
+                this.userUid = data!.uid;
+                return this.authService.getUserById(this.userUid);
+              })
+            )
+            .subscribe((user) => {
+              this.loggedInUser = user;
+            });
+        } else {
+          this.isLoggedInAndEmailVerified = false;
+          this.loggedInUser = [];
+          this.userUid = undefined;
+        }
+      });
   }
-  
-  logout(){
+
+  logout() {
     this.router.navigate(['/']);
     this.authService.logout();
     window.location.reload();

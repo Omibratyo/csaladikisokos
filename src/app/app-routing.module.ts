@@ -1,7 +1,4 @@
 import { BsSidebarComponent } from './bs-sidebar/bs-sidebar.component';
-import { CleaningStorageComponent } from './pages/cleaning-storage/cleaning-storage.component';
-import { BathroomStorageComponent } from './pages/bathroom-storage/bathroom-storage.component';
-import { FoodStorageComponent } from './pages/food-storage/food-storage.component';
 import { StorageMissingItemsComponent } from './pages/storage-missing-items/storage-missing-items.component';
 import { StorageItemUpdateComponent } from './pages/storage-item-update/storage-item-update.component';
 import { StorageItemAddComponent } from './pages/storage-item-add/storage-item-add.component';
@@ -24,19 +21,14 @@ const routes: Routes = [
   { path: 'login' , component: LoginComponent},
   { path: 'signup' , component: SignupComponent},
   { path: 'bs-navbar' , component: BsNavbarComponent},
-  { path: 'bs-sidebar' , component: BsSidebarComponent},
   { path: 'bucket-list' , component: BucketListComponent, canActivate: [AuthGuardService]},
   { path: 'budget' , component: BudgetComponent, canActivate: [AuthGuardService]},
-  { path: 'recipes' , component: RecipesComponent, canActivate: [AuthGuardService]},
   { path: 'shopping-list' , component: ShoppingListComponent, canActivate: [AuthGuardService]},
   { path: 'storage' , component: StorageComponent, canActivate: [AuthGuardService]},
   { path: 'storage-item' , component: StorageItemComponent, canActivate: [AuthGuardService]},
   { path: 'storage-item-add' , component: StorageItemAddComponent, canActivate: [AuthGuardService]},
   { path: 'storage-item-update' , component: StorageItemUpdateComponent, canActivate: [AuthGuardService]},
-  { path: 'storage-missing-items' , component: StorageMissingItemsComponent, canActivate: [AuthGuardService]},
-  { path: 'food-storage' , component: FoodStorageComponent},
-  { path: 'bathroom-storage' , component: BathroomStorageComponent},
-  { path: 'cleaning-storage' , component: CleaningStorageComponent}
+  { path: 'storage-missing-items' , component: StorageMissingItemsComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

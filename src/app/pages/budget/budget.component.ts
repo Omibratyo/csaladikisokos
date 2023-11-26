@@ -39,10 +39,13 @@ export class BudgetComponent implements OnInit {
       this.sortedTable = this.costs.slice();
       this.sortedData = this.getUniqueCategories(data);
       this.chartOptions = this.getChartOptions('#198754', this.sortedData);
-      this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
+      this.columnChartOptions = this.getColumnChartOptions(
+        '#198754',
+        this.sortedData
+      );
       this.loading = false;
     });
-  
+
     this.authService.isUserLoggedIn().subscribe(
       (user) => {
         this.loggedInUser = user;
@@ -54,24 +57,25 @@ export class BudgetComponent implements OnInit {
 
     this.filterByDate();
   }
-  
 
   ngAfterViewInit() {
     setTimeout(() => {
       this.chartOptions = this.getChartOptions('#198754', this.sortedData);
-      this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
+      this.columnChartOptions = this.getColumnChartOptions(
+        '#198754',
+        this.sortedData
+      );
     });
   }
 
   openBudgetAddDialog() {
     const dialogRef = this.dialog.open(BudgetAddComponent, {
       width: '500px',
-      data: { }
+      data: {},
     });
-  
-    dialogRef.afterClosed().subscribe(result => {
+
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        
       }
     });
   }
@@ -98,7 +102,7 @@ export class BudgetComponent implements OnInit {
 
   getUniqueCategories(data: Costs[]): Costs[] {
     const uniqueCategoriesMap = new Map<string, Costs>();
-  
+
     data.forEach((cost) => {
       if (uniqueCategoriesMap.has(cost.category)) {
         const existingCost = uniqueCategoriesMap.get(cost.category);
@@ -111,16 +115,16 @@ export class BudgetComponent implements OnInit {
           price: cost.price,
           user_id: '',
           id: '',
-          date: cost.date
+          date: cost.date,
         });
       }
     });
-  
+
     const uniqueCategories: Costs[] = Array.from(uniqueCategoriesMap.values());
-  
+
     return uniqueCategories;
-}
-  
+  }
+
   private getColumnChartOptions(titleColor: string, data: Costs[]) {
     return {
       animationEnabled: true,
@@ -140,7 +144,7 @@ export class BudgetComponent implements OnInit {
       ],
     };
   }
-  
+
   private getChartOptions(titleColor: string, data: Costs[]) {
     return {
       animationEnabled: true,
@@ -164,17 +168,20 @@ export class BudgetComponent implements OnInit {
   }
 
   delete(cost: Costs) {
-    this.costsService.delete(cost.id)
+    this.costsService
+      .delete(cost.id)
       .then(() => {
-        this.costs = this.costs.filter(c => c.id !== cost.id);
-        
+        this.costs = this.costs.filter((c) => c.id !== cost.id);
+
         this.sortedData = this.getUniqueCategories(this.costs);
-    
+
         this.chartOptions = this.getChartOptions('#198754', this.sortedData);
-        this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
-        
+        this.columnChartOptions = this.getColumnChartOptions(
+          '#198754',
+          this.sortedData
+        );
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error deleting item: ', error);
       });
   }
@@ -185,7 +192,7 @@ export class BudgetComponent implements OnInit {
     const selectedMonth = selectedDate.getMonth();
 
     const filteredData: Costs[] = this.costs.filter((cost) => {
-      const costDate: Date = cost.date.toDate(); // Convert Firestore Timestamp to JavaScript Date
+      const costDate: Date = cost.date.toDate();
       const costYear = costDate.getFullYear();
       const costMonth = costDate.getMonth();
       return costYear === selectedYear && costMonth === selectedMonth;
@@ -194,14 +201,16 @@ export class BudgetComponent implements OnInit {
     this.sortedTable = filteredData;
     this.sortedData = this.getUniqueCategories(filteredData);
     this.chartOptions = this.getChartOptions('#198754', this.sortedData);
-    this.columnChartOptions = this.getColumnChartOptions('#198754', this.sortedData);
+    this.columnChartOptions = this.getColumnChartOptions(
+      '#198754',
+      this.sortedData
+    );
   }
-  
+
   resetFilter() {
     this.filterDate.setValue(new Date());
     this.ngOnInit();
   }
-  
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {

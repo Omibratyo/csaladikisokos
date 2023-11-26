@@ -50,14 +50,5 @@ export class ProductsService {
     products.id = this.afs.createId();
     return this.afs.collection<Products>(this.collectionName).doc(products.id).set(products);
   }
-
-  // updateImage függvény: A felhasználóhoz tartozó kép URL beállítása a Firebase Realtime Database-ben.
-  updateImage(user_id: string, imageObject: { image_url: string }) {
-    // Meghatározza az adatbázis csomópont elérési útvonalát, ahol a kép URL-t el kell menteni.
-    const path = `path_to_database_node/${user_id}/image_url`;
-    // Az `imageObject` segítségével beállítja a kép URL értékét az adatbázisban a meghatározott útvonalon.
-    // Ez a függvény az adatbázisban létrehozza vagy frissíti a `user_id`-hoz tartozó kép URL értékét.
-    return this.db.object(path).set(imageObject);
-  }
 }
 

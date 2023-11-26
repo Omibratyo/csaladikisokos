@@ -8,36 +8,42 @@ import { Costs } from '../models/Costs';
 import { getAuth } from '@angular/fire/auth';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CostsService {
-
   collectionName = 'Costs';
-  url='';
-  userUid: string='';
-  
+  url = '';
+  userUid: string = '';
 
-  constructor(
-    private afs: AngularFirestore,
-    private db: AngularFireDatabase
-  ) { }
+  constructor(private afs: AngularFirestore, private db: AngularFireDatabase) {}
 
-  loadCosts(){
+  loadCosts() {
     const user = getAuth().currentUser;
-      
-      if (user) {
-        this.userUid = user.uid;
-      } else {
-      }
-    return this.afs.collection<Costs>(this.collectionName, ref => ref.where('user_id', '==', this.userUid)).valueChanges();
+
+    if (user) {
+      this.userUid = user.uid;
+    } else {
+    }
+    return this.afs
+      .collection<Costs>(this.collectionName, (ref) =>
+        ref.where('user_id', '==', this.userUid)
+      )
+      .valueChanges();
   }
 
   getProductsById(Id: string) {
-    return this.afs.collection<Costs>(this.collectionName, ref => ref.where('id', '==', Id).orderBy('quantity', 'desc')).valueChanges();
+    return this.afs
+      .collection<Costs>(this.collectionName, (ref) =>
+        ref.where('id', '==', Id).orderBy('quantity', 'desc')
+      )
+      .valueChanges();
   }
 
   async update(costs: Costs) {
-    return this.afs.collection<Costs>(this.collectionName).doc(costs.id).update(costs);
+    return this.afs
+      .collection<Costs>(this.collectionName)
+      .doc(costs.id)
+      .update(costs);
   }
 
   delete(id: string) {
@@ -46,9 +52,9 @@ export class CostsService {
 
   create(costs: Costs) {
     costs.id = this.afs.createId();
-    return this.afs.collection<Costs>(this.collectionName).doc(costs.id).set(costs);
+    return this.afs
+      .collection<Costs>(this.collectionName)
+      .doc(costs.id)
+      .set(costs);
   }
-  
 }
-
-

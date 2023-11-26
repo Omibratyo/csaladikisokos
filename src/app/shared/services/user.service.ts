@@ -23,7 +23,6 @@ export class UserService {
   }
 
   get(uid: string){
-    //return this.db.object('/users' + uid);
     return this.afs.collection<AppUser>(this.collectionName).doc(uid).valueChanges();
   }
   

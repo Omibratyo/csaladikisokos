@@ -11,14 +11,16 @@ import { ErrorDialogComponent } from '../../error-dialog/error-dialog.component'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   public showPassword: boolean = false;
   registrationAllowed = false;
 
-  email = new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]);
+  email = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+  ]);
   password = new FormControl('');
 
   loadingSubscription?: Subscription;
@@ -26,11 +28,14 @@ export class LoginComponent implements OnInit {
 
   loading: boolean = false;
 
+  constructor(
+    public authService: AuthService,
+    private afAuth: AngularFireAuth,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
-  constructor( public authService: AuthService, private afAuth: AngularFireAuth,private router: Router, private dialog: MatDialog) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   login() {
     this.router.navigateByUrl('');
@@ -38,32 +43,32 @@ export class LoginComponent implements OnInit {
 
   async loginnew() {
     this.loading = true;
-    
+
     try {
-      const cred = await this.authService.loginnew(this.email.value, this.password.value);
-  
+      const cred = await this.authService.loginnew(
+        this.email.value,
+        this.password.value
+      );
       if (await this.authService.isEmailVerified()) {
-        console.log(cred);
         this.router.navigateByUrl('');
       } else {
-        this.openErrorDialog('Az e-mail-cím még nincsen megerősítve, a belépéshez először erősítsd meg az e-mail-címed.');
+        this.openErrorDialog(
+          'Az e-mail-cím még nincsen megerősítve, a belépéshez először erősítsd meg az e-mail-címed.'
+        );
       }
-  
       this.loading = false;
     } catch (error) {
-      console.error(error);
       this.loading = false;
       this.openErrorDialog('Hibás felhasználónév vagy jelszó!');
     }
   }
-  
 
   openErrorDialog(message: string): void {
     this.dialog.open(ErrorDialogComponent, {
       width: '300px',
       data: { message },
     });
-  } 
+  }
 
   ngOnDestroy() {
     this.loadingSubscription?.unsubscribe();
@@ -76,9 +81,7 @@ export class LoginComponent implements OnInit {
   checkNameFields() {
     const email = this.email.value;
     const password = this.password.value;
-    
-    // Az űrlap engedélyezése csak akkor történik meg, ha mindkét mező kitöltve van
+
     this.registrationAllowed = email.length > 0 && password.length > 0;
   }
-  
 }

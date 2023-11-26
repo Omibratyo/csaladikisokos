@@ -55,7 +55,7 @@ export class StorageItemUpdateComponent implements OnInit {
 
     if (this.update.valid) {
       this.productsService.update(this.toUpdate).then(_ => {
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('/storage');
       }).catch(error => {
         console.error(error);
       });

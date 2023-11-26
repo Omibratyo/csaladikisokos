@@ -388,6 +388,7 @@ export class ShoppingListComponent implements OnInit {
       }
     }
   }
+
   toggleItem(index: number) {
     if (this.checkedItems.has(index)) {
       this.checkedItems.delete(index);
